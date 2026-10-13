@@ -1,39 +1,45 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#2563eb"><title>I Me Mine — English Grammar</title>
 <style>
-:root{font-family:system-ui,-apple-system,sans-serif;color:#18243b;background:#f6f7fc}*{box-sizing:border-box}body{margin:0}main{max-width:540px;margin:auto;min-height:100dvh;padding:calc(env(safe-area-inset-top) + 35px) 22px 36px}.brand{display:flex;align-items:center;gap:9px;font-weight:900;font-size:23px}.brand span{padding:5px 11px;border-radius:13px;color:white}.brand span:nth-child(1){background:#2563eb}.brand span:nth-child(2){background:#ec4899}.brand span:nth-child(3){background:#f59e0b;color:#1b2540}.eyebrow{color:#63718d;font-size:12px;letter-spacing:.12em;font-weight:800;text-transform:uppercase;margin-top:45px}.hero{font-size:clamp(33px,8vw,48px);line-height:1.09;letter-spacing:-.04em;margin:14px 0}p{line-height:1.55;color:#5b6680}.card{background:white;border:1px solid #e6eaf4;border-radius:25px;padding:25px;box-shadow:0 15px 40px #18243b0a;margin-top:25px}.top{display:flex;justify-content:space-between;color:#68748e;font-size:13px;font-weight:700}.progress{height:8px;background:#eef1f8;border-radius:10px;margin:15px 0 25px;overflow:hidden}.fill{height:100%;width:0;background:#2563eb;transition:width .2s}.prompt{font-size:25px;font-weight:800;line-height:1.35;margin:12px 0 24px}.choices{display:grid;gap:11px}button{font:inherit;cursor:pointer}.choice{border:2px solid #e3e8f2;background:#fff;border-radius:15px;padding:17px;text-align:left;font-weight:750;color:#24314a}.choice:disabled{cursor:default}.choice.correct{background:#e7f8ed;border-color:#22a05a}.choice.wrong{background:#fff0f3;border-color:#ec4899}.feedback{padding:15px;border-radius:14px;background:#f2f5fc;margin-top:16px;font-size:14px;line-height:1.5}.primary{width:100%;padding:17px;background:#2563eb;border:0;border-radius:15px;color:white;font-weight:800;margin-top:16px}.small{text-align:center;font-size:12px;margin-top:26px;color:#8a94a8}h2{font-size:30px;margin:12px 0}.hide{display:none}.level-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:18px 0}.level{border:2px solid #e3e8f2;background:#fff;border-radius:15px;padding:15px 8px;font-weight:900;color:#33405b}.level.active{border-color:#2563eb;background:#eef4ff;color:#2563eb}.level small{display:block;font-size:11px;font-weight:600;margin-top:5px;color:#71809a}.secondary{width:100%;padding:13px;background:transparent;border:0;color:#63718d;font-weight:750;margin-top:9px}.stat{font-size:13px;color:#6b7690;margin-top:12px}.choice:focus-visible,.primary:focus-visible,.level:focus-visible{outline:3px solid #f59e0b;outline-offset:3px}@media(max-width:360px){.card{padding:18px}.prompt{font-size:22px}}
+:root{font-family:system-ui,-apple-system,sans-serif;color:#18243b;background:#f6f7fc}*{box-sizing:border-box}body{margin:0}main{max-width:540px;margin:auto;min-height:100dvh;padding:calc(env(safe-area-inset-top) + 35px) 22px 36px}.brand{display:flex;align-items:center;gap:9px;font-weight:900;font-size:23px}.brand span{padding:5px 11px;border-radius:13px;color:white}.brand span:nth-child(1){background:#2563eb}.brand span:nth-child(2){background:#ec4899}.brand span:nth-child(3){background:#f59e0b;color:#1b2540}.eyebrow{color:#63718d;font-size:12px;letter-spacing:.12em;font-weight:800;text-transform:uppercase;margin-top:45px}.hero{font-size:clamp(33px,8vw,48px);line-height:1.09;letter-spacing:-.04em;margin:14px 0}p{line-height:1.55;color:#5b6680}.card{background:white;border:1px solid #e6eaf4;border-radius:25px;padding:25px;box-shadow:0 15px 40px #18243b0a;margin-top:25px}.top{display:flex;justify-content:space-between;color:#68748e;font-size:13px;font-weight:700}.progress{height:8px;background:#eef1f8;border-radius:10px;margin:15px 0 25px;overflow:hidden}.fill{height:100%;width:0;background:#2563eb;transition:width .2s}.prompt{font-size:25px;font-weight:800;line-height:1.35;margin:12px 0 24px}.choices{display:grid;gap:11px}button{font:inherit;cursor:pointer}.choice{border:2px solid #e3e8f2;background:#fff;border-radius:15px;padding:17px;text-align:left;font-weight:750;color:#24314a}.choice:disabled{cursor:default}.choice.correct{background:#e7f8ed;border-color:#22a05a}.choice.wrong{background:#fff0f3;border-color:#ec4899}.feedback{padding:15px;border-radius:14px;background:#f2f5fc;margin-top:16px;font-size:14px;line-height:1.5}.primary{width:100%;padding:17px;background:#2563eb;border:0;border-radius:15px;color:white;font-weight:800;margin-top:16px}.small{text-align:center;font-size:12px;margin-top:26px;color:#8a94a8}h2{font-size:30px;margin:12px 0}.hide{display:none}.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin:18px 0}.topic-choice{border:2px solid #e3e8f2;background:#fff;border-radius:15px;padding:13px 9px;font-weight:800;color:#33405b}.topic-choice.active{border-color:#2563eb;background:#eef4ff;color:#2563eb}.secondary{width:100%;padding:13px;background:transparent;border:0;color:#63718d;font-weight:750;margin-top:9px}.stat{font-size:13px;color:#6b7690;margin-top:12px}.choice:focus-visible,.primary:focus-visible,.topic-choice:focus-visible{outline:3px solid #f59e0b;outline-offset:3px}@media(max-width:360px){.card{padding:18px}.prompt{font-size:22px}}
 </style></head><body><main>
 <div class="brand"><img src="app-icon.png" alt="I Me Mine" width="80" height="80" style="border-radius:19px;object-fit:cover"></div>
-<section id="welcome"><div class="eyebrow">English grammar, made playful</div><h1 class="hero">Small lessons.<br>Big confidence.</h1><p>Practice the English that trips everyone up. Quick questions, friendly explanations, and a little win every time.</p><div class="card"><h2>Ready to play?</h2><p>Choose your level. Every round has 10 questions and helpful explanations.</p><div class="level-grid" role="group" aria-label="Grammar difficulty"><button class="level active" data-level="A1" aria-pressed="true">A1<small>Start easy</small></button><button class="level" data-level="A2" aria-pressed="false">A2<small>Keep growing</small></button><button class="level" data-level="B1" aria-pressed="false">B1<small>Challenge me</small></button></div><div class="stat" id="best">Your best: —</div><button class="primary" id="start">Let's play →</button></div></section>
-<section id="game" class="hide"><div class="card"><div class="top"><span id="counter"></span><span id="score"></span></div><div class="progress"><div class="fill" id="fill"></div></div><div class="eyebrow" id="topic" style="margin:0"></div><div class="prompt" id="prompt"></div><div class="choices" id="choices"></div><div id="feedback" class="feedback hide" aria-live="polite"></div><button class="primary hide" id="next">Next question →</button><button class="secondary" id="quit">← Change level</button></div></section>
-<section id="finish" class="hide"><div class="card"><div class="eyebrow">Round complete</div><h1 class="hero" id="result"></h1><p id="message"></p><button class="primary" id="again">Play again →</button><button class="secondary" id="home">Choose another level</button></div></section>
+<section id="welcome"><div class="eyebrow">English grammar, made playful</div><h1 class="hero">Small lessons.<br>Big confidence.</h1><p>Practice the English that trips everyone up. Quick questions, friendly explanations, and a little win every time.</p><div class="card"><h2>Ready to play?</h2><p>Pick a topic or mix it up. Ten quick questions, with explanations as you go.</p><div class="topic-grid" id="topic-picker" role="group" aria-label="Choose a grammar topic"></div><div class="stat" id="best">Your best: —</div><button class="primary" id="start">Let's play →</button></div></section>
+<section id="game" class="hide"><div class="card"><div class="top"><span id="counter"></span><span id="score"></span></div><div class="progress"><div class="fill" id="fill"></div></div><div class="eyebrow" id="topic" style="margin:0"></div><div class="prompt" id="prompt"></div><div class="choices" id="choices"></div><div id="feedback" class="feedback hide" aria-live="polite"></div><button class="primary hide" id="next">Next question →</button><button class="secondary" id="quit">← Choose topic</button></div></section>
+<section id="finish" class="hide"><div class="card"><div class="eyebrow">Round complete</div><h1 class="hero" id="result"></h1><p id="message"></p><button class="primary" id="again">Play again →</button><button class="secondary" id="home">Choose another topic</button></div></section>
 <div class="small">I Me Mine · Practice makes progress.</div></main>
 <script src="questions.js"></script>
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-const LEVELS=["A1","A2","B1"];
-let level="A1",round=[],index=0,points=0,answered=false;
+let selectedTopic="Mixed practice",round=[],index=0,points=0,answered=false;
 const store={
  get(key,fallback){try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}},
  set(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch{}}
 };
 function shuffle(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function show(id){["welcome","game","finish"].forEach(s=>$(s).classList.toggle("hide",s!==id))}
-function selectLevel(value){level=value;document.querySelectorAll("[data-level]").forEach(b=>{const active=b.dataset.level===level;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active))});updateBest()}
-function updateBest(){const best=store.get("imm-best-"+level,null);$("best").textContent=best===null?"No rounds played at "+level+" yet":"Your best at "+level+": "+best+" / 10"}
+const TOPICS=["Mixed practice",...new Set(QUESTIONS.map(q=>q.t))];
+function selectTopic(value){selectedTopic=value;document.querySelectorAll("[data-topic]").forEach(b=>{const active=b.dataset.topic===value;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active))});updateBest()}
+function updateBest(){const best=store.get("imm-best-"+selectedTopic,null);$("best").textContent=best===null?"No rounds played yet":"Your best: "+best+" / 10"}
+TOPICS.forEach(t=>{const b=document.createElement("button");b.className="topic-choice";b.dataset.topic=t;b.textContent=t;b.setAttribute("aria-pressed","false");b.onclick=()=>selectTopic(t);$("topic-picker").append(b)});
 function start(){
- const pool=QUESTIONS.filter(q=>q.level===level);
- const recent=store.get("imm-recent-"+level,[]);
+ const pool=QUESTIONS.filter(q=>selectedTopic==="Mixed practice"||q.t===selectedTopic);
+ const recent=store.get("imm-recent-"+selectedTopic,[]);
  const fresh=shuffle(pool.filter(q=>!recent.includes(q.id)));
  const old=shuffle(pool.filter(q=>recent.includes(q.id)));
- round=[...fresh,...old].slice(0,10).map(q=>{const order=shuffle([0,1,2]);return {...q,a:order.map(i=>q.a[i]),c:order.indexOf(q.c)}});
- store.set("imm-recent-"+level,[...new Set([...round.map(q=>q.id),...recent])].slice(0,20));
+ // Mixed practice favors approachable questions, with occasional harder ones.
+ const pick=selectedTopic==="Mixed practice"
+  ? [...fresh.filter(q=>q.level==="A1").slice(0,5),...fresh.filter(q=>q.level==="A2").slice(0,3),...fresh.filter(q=>q.level==="B1").slice(0,2)]
+  : fresh.slice(0,10);
+ const selected=[...pick,...fresh,...old].filter((q,i,a)=>a.findIndex(x=>x.id===q.id)===i).slice(0,10);
+ round=shuffle(selected).map(q=>{const order=shuffle([0,1,2]);return {...q,a:order.map(i=>q.a[i]),c:order.indexOf(q.c)}});
+ store.set("imm-recent-"+selectedTopic,[...new Set([...round.map(q=>q.id),...recent])].slice(0,Math.max(10,pool.length-10)));
  index=0;points=0;show("game");render();
 }
 function render(){
  answered=false;const x=round[index];
- $("counter").textContent=level+" · QUESTION "+(index+1)+" OF 10";
+ $("counter").textContent=QUESTION "+(index+1)+" OF 10";
  $("score").textContent=points+" correct";
  $("fill").style.width=(index/10*100)+"%";
  $("topic").textContent=x.t;
@@ -54,8 +60,8 @@ function choose(i){
  $("next").classList.remove("hide");
 }
 function finish(){
- const best=store.get("imm-best-"+level,0);
- if(points>best)store.set("imm-best-"+level,points);
+ const best=store.get("imm-best-"+selectedTopic,0);
+ if(points>best)store.set("imm-best-"+selectedTopic,points);
  $("result").textContent=points+" / 10";
  $("message").textContent=points>=8?"Brilliant! You've got this.":points>=5?"Nice work! Every round makes you stronger.":"Keep going. Learning takes practice.";
  show("finish");
@@ -65,6 +71,5 @@ $("start").onclick=start;
 $("again").onclick=start;
 $("home").onclick=()=>{updateBest();show("welcome")};
 $("quit").onclick=()=>{updateBest();show("welcome")};
-document.querySelectorAll("[data-level]").forEach(b=>b.onclick=()=>selectLevel(b.dataset.level));
-selectLevel("A1");
+selectTopic("Mixed practice");
 </script></body></html>
