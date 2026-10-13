@@ -26,7 +26,11 @@
 #welcome .quick-action small{font-size:11px}
 @media(max-height:740px){#welcome .home-title h1{font-size:28px;margin-bottom:12px}#welcome .today-card{padding:13px 16px}#welcome .today-main{margin:9px 0}#welcome .quick-action{min-height:90px}}
 
-#plan-screen .settings-card .primary{width:100%;margin-top:12px}\n</style></head><body><main>
+#plan-screen .settings-card .primary{width:100%;margin-top:12px}\n
+/* Weak spots are actionable topic shortcuts. */
+.weak-topic-button{display:block;width:100%;text-align:left;font:inherit;cursor:pointer;touch-action:manipulation}
+.weak-topic-button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+</style></head><body><main>
 <header class="app-header"><div class="app-identity"><div class="wordmark" aria-label="I Me Mine"><span>I</span><span>me</span><span>mine</span></div></div><button class="header-plus" id="view-upgrade" aria-label="Explore Plus">PLUS ✦</button></header>
 <section id="welcome" class="screen"><div class="home-title"><h1>You know better.<br><em>Now do better.</em></h1></div><div class="today-card"><div class="eyebrow">TODAY'S PRACTICE</div><div class="today-main"><div><h2>Ready for a round?</h2><p>A little practice makes a difference.</p></div><div class="round-ring"><strong>10</strong><small>questions</small></div></div><button class="primary" id="home-practice">Start Practice →</button></div>
  <div class="welcome-heading hide"><span class="eyebrow">YOUR PRACTICE</span><h1>Ready for a quick round?</h1><p>Ten questions. One little win at a time.</p></div>
@@ -228,7 +232,7 @@ function updateDashboard(){
  recent.forEach(s=>{const wrap=document.createElement("div");wrap.className="chart-col";const bar=document.createElement("div");bar.className="chart-bar";bar.style.height=Math.max(3,100*s.score/s.total)+"%";const label=document.createElement("small");label.textContent=Math.round(100*s.score/s.total)+"%";wrap.append(bar,label);$("progress-bars").append(wrap)});
  const stats=store.get("imm-stats",{});
  $("weak-list").replaceChildren();
- Object.entries(stats).filter(([,s])=>s.wrong>0).sort((a,b)=>b[1].wrong-a[1].wrong).slice(0,5).forEach(([topic,s])=>{const p=document.createElement("div");p.className="weak-row";p.textContent=topic+" · "+Math.round(100*s.correct/(s.correct+s.wrong))+"% correct";$("weak-list").append(p)});
+ Object.entries(stats).filter(([,s])=>s.wrong>0).sort((a,b)=>b[1].wrong-a[1].wrong).slice(0,5).forEach(([topic,s])=>{const p=document.createElement("button");p.type="button";p.className="weak-row weak-topic-button";p.textContent=topic+" · "+Math.round(100*s.correct/(s.correct+s.wrong))+"% correct";p.setAttribute("aria-label","Practice "+topic);p.onclick=()=>{selectTopic(topic);start("normal")};$("weak-list").append(p)});
 }
 $("start").onclick=()=>{selectTopic("Mixed practice");start("normal")};
 $("topic-start").onclick=()=>start("normal");
