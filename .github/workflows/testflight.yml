@@ -29,6 +29,10 @@ jobs:
           npm run build
           npx cap add ios
           npx cap sync ios
+      - name: Set I Me Mine app icon
+        run: |
+          python3 -m pip install --quiet --break-system-packages Pillow
+          python3 scripts/generate_app_icon.py
       - name: Install signing credentials and verify profile
         env:
           CERT_B64: ${{ secrets.IOS_CERTIFICATE_BASE64 }}
