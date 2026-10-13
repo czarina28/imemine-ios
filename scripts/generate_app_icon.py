@@ -19,9 +19,12 @@ for x0, y0, x1, y1, color, label in tiles:
     draw.rounded_rectangle((x0, y0, x1, y1), radius=62, fill=color)
     font_size = 178 if label == "mine" else 202
     font = ImageFont.truetype(font_path, font_size)
-    bbox = draw.textbbox((0, 0), label, font=font)
-    tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
-    draw.text(((x0 + x1 - tw)/2 - bbox[0], (y0 + y1 - th)/2 - bbox[1] - 7), label, font=font, fill="white")
+    # Use a shared typographic baseline instead of centering each word's
+    # individual bounding box. Different word shapes and font sizes otherwise
+    # make "me" appear to float above "mine".
+    baseline_y = 565
+    draw.text(((x0 + x1) / 2, baseline_y), label, font=font,
+              anchor="ms", fill="white")
 out = Path("ios/App/App/Assets.xcassets/AppIcon.appiconset")
 out.mkdir(parents=True, exist_ok=True)
 img.save(out / "AppIcon-512@2x.png", format="PNG")
