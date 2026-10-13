@@ -19,12 +19,13 @@
 <section id="practice" class="screen hide"><div class="eyebrow">PRACTICE YOUR WAY</div><h1 class="practice-title">What shall we <em>work on?</em></h1><p class="practice-description">Choose a focus, or let us mix things up.</p><button class="practice-tile" id="practice-mix"><span class="tile-icon">✦</span><span class="tile-copy"><strong>Mix it up</strong><small>10 questions across all topics</small></span><span class="tile-arrow">→</span></button><div class="section-title"><h2>Explore grammar</h2><span id="topic-count"></span></div><div class="practice-topics" id="practice-topics"></div></section>
 <section id="progress-screen" class="screen hide"><div class="eyebrow">YOUR PROGRESS</div><h1 class="practice-title">Know what you've mastered.<br><em>Know what's next.</em></h1><p class="practice-description">Your practice history, strengths and areas to work on.</p><button class="primary" id="progress-plan">Work my plan → ✦ PLUS</button><p class="notice" id="plan-status">Personalized practice plan · Plus feature</p><h2>Progress over time</h2><p id="progress-caption"></p><div class="chart-bars" id="progress-bars"></div><h2>My Weak Spots</h2><div id="weak-list"></div></section>
 <section id="settings-screen" class="screen hide"><div class="eyebrow">PREFERENCES</div><h1 class="practice-title">Settings</h1><div class="settings-card"><h2>I Me Mine</h2><p>English grammar, made playful.</p><p>Grammar practice is free. Plus will add deeper personalized progress tools.</p><div class="appearance-setting"><label for="theme-select">Appearance</label><select id="theme-select"><option value="system">Match device</option><option value="light">Light</option><option value="dark">Dark</option></select><p>Use your device setting or choose a theme.</p></div><button class="secondary" id="settings-plus">Explore Plus</button></div></section>
-<section id="upgrade" class="screen hide"><button class="screen-back" id="back">← Back</button><div class="plus-screen"><div class="eyebrow">I ME MINE PLUS</div><h1>Make progress <em>you can see.</em></h1><p>Get personalized practice plans, deeper progress insights, and mastery tracking. All grammar practice stays free.</p><div class="plus-benefits"><div>✓ Your personal practice plan, ranked by accuracy</div><div>✓ Focused sessions for recurring mistakes</div><div>✓ Mastery tracking across multiple sessions</div></div><div class="plus-preview"><strong>Your next best topic</strong><p id="plus-recommendation">Complete a practice round to reveal your learning priorities.</p><button class="secondary" id="plus-plan">Start my personalized plan →</button></div><div class="price"><strong>€4.99</strong><small>Planned one-time purchase · No subscription</small></div><button class="primary" id="buy" disabled>Purchases coming to iPhone</button><button class="secondary" id="restore">Restore purchases</button><p class="notice">Preview only. Apple purchases are not enabled yet.</p><p class="notice" id="purchase-note" role="status"></p></div></section>
+<section id="upgrade" class="screen hide"><button class="screen-back" id="back">← Back</button><div class="plus-screen"><div class="eyebrow">I ME MINE PLUS</div><h1>Make progress <em>you can see.</em></h1><p>Get personalized practice plans, deeper progress insights, and mastery tracking. All grammar practice stays free.</p><div class="plus-benefits"><div>✓ Your personal practice plan, ranked by accuracy</div><div>✓ Focused sessions for recurring mistakes</div><div>✓ Mastery tracking across multiple sessions</div></div><div class="plus-preview"><strong>Your next best topic</strong><p id="plus-recommendation">Complete a practice round to reveal your learning priorities.</p><button class="secondary" id="plus-plan">Start my personalized plan →</button></div><div class="price"><strong id="plus-price">Price loading…</strong><small>One-time purchase · No subscription</small></div><button class="primary" id="buy" disabled>Checking App Store…</button><button class="secondary" id="restore">Restore purchases</button><p class="notice" id="store-status">Connecting to Apple purchases…</p><p class="notice" id="purchase-note" role="status"></p></div></section>
 <section id="game" class="screen hide"><button class="screen-back" id="quit">← Home</button><div class="game-panel"><div class="top"><span id="counter"></span><span id="score"></span></div><div class="progress"><div class="fill" id="fill"></div></div><div class="eyebrow" id="topic"></div><div class="prompt" id="prompt"></div><div class="choices" id="choices"></div><div id="feedback" class="feedback hide" aria-live="polite"></div><button class="primary hide" id="next">Next question →</button></div></section>
 <section id="finish" class="screen hide"><div class="finish-panel"><span class="eyebrow">ROUND COMPLETE</span><h1 id="result"></h1><p id="message"></p><button class="primary" id="again">Play again →</button><button class="secondary" id="home">Back to home</button></div></section>
 <nav class="bottom-nav" id="bottom-nav" aria-label="Main navigation"><button data-tab="welcome" class="active"><span>⌂</span>Home</button><button data-tab="practice"><span>▤</span>Practice</button><button data-tab="progress-screen"><span>▥</span>Progress</button><button data-tab="settings-screen"><span>⚙</span>Settings</button></nav></main>
 <script type="module">
 import { QUESTIONS } from "./questions.js";
+import { purchases as purchaseBridge } from "./purchases.js";
 "use strict";
 const $=id=>document.getElementById(id);
 const systemTheme=window.matchMedia?.("(prefers-color-scheme: dark)");
@@ -38,7 +39,7 @@ applyTheme(["system","light","dark"].includes(savedTheme)?savedTheme:"system");
 systemTheme?.addEventListener?.("change",()=>{if($("theme-select")?.value==="system")applyTheme("system")});
 let selectedTopic="Mixed practice",round=[],index=0,points=0,answered=false,mode="normal";
 
-const purchaseBridge=window.ImeMinePurchases||null;
+
 function isUnlocked(){return purchaseBridge?.isUnlocked?.()===true}
 function recommendedTopic(){
  const stats=store.get("imm-stats",{});
@@ -187,6 +188,23 @@ $("again").onclick=()=>start(mode);
 $("view-upgrade").onclick=()=>show("upgrade");
 $("plus-banner").onclick=()=>show("upgrade");
 $("back").onclick=()=>{refreshOffer();show(currentTab)};
+function updatePurchaseUI(){
+ const ready=!!purchaseBridge.price();
+ $("plus-price").textContent=purchaseBridge.price()||"Price unavailable";
+ $("buy").disabled=!ready||isUnlocked();
+ $("buy").textContent=isUnlocked()?"Plus unlocked ✓":ready?"Unlock Plus — "+purchaseBridge.price():"Purchase unavailable";
+ $("store-status").textContent=isUnlocked()?"Your Plus features are unlocked.":ready?"Secure one-time purchase through Apple.":"Apple purchase information is not available yet. Try again later.";
+ if(document.querySelector("#upgrade:not(.hide)"))show("upgrade");
+ updateDashboard();
+}
+purchaseBridge.setOnChange(updatePurchaseUI);
+purchaseBridge.initialize().then(updatePurchaseUI).catch(err=>{$("purchase-note").textContent=err.message;updatePurchaseUI()});
+$("buy").onclick=async()=>{
+ $("buy").disabled=true;$("purchase-note").textContent="Opening Apple's purchase screen…";
+ try{await purchaseBridge.buy();$("purchase-note").textContent="Plus unlocked. Thank you!"}
+ catch(err){$("purchase-note").textContent=err.message||"Purchase not completed."}
+ finally{updatePurchaseUI()}
+};
 $("restore").onclick=async()=>{
  if(typeof purchaseBridge?.restore!=="function"){$("purchase-note").textContent="Restoring purchases will be available in the iPhone app.";return}
  $("purchase-note").textContent="Checking purchases…";
