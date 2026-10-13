@@ -69,7 +69,7 @@ function start(newMode="normal"){
   ? [...fresh.filter(q=>q.level==="A1").slice(0,5),...fresh.filter(q=>q.level==="A2").slice(0,3),...fresh.filter(q=>q.level==="B1").slice(0,2)]
   : fresh.slice(0,10);
  const selected=[...pick,...fresh,...old].filter((q,i,a)=>a.findIndex(x=>x.id===q.id)===i).slice(0,10);
- round=shuffle(selected).map(q=>{const order=shuffle([0,1,2]);return {...q,a:order.map(i=>q.a[i]),c:order.indexOf(q.c)}});
+ round=shuffle(selected).map(q=>{const order=shuffle(q.a.map((_,i)=>i));return {...q,a:order.map(i=>q.a[i]),c:order.indexOf(q.c)}});
  store.set("imm-recent-"+selectedTopic,[...new Set([...round.map(q=>q.id),...recent])].slice(0,Math.max(10,pool.length-10)));
  index=0;points=0;show("game");render();
 }
@@ -78,7 +78,7 @@ function render(){
  $("counter").textContent=(mode==="normal"?selectedTopic:mode==="review"?"Review mistakes":"Weak spots")+" · "+(index+1)+" of "+round.length;
  $("score").textContent=points+" correct";
  $("fill").style.width=(index/round.length*100)+"%";
- $("topic").textContent=x.t;
+ $("topic").textContent="Complete the sentence · "+x.t;
  $("prompt").textContent=x.q;
  $("choices").replaceChildren();
  $("feedback").classList.add("hide");
