@@ -25,7 +25,7 @@
 #welcome .quick-action strong{font-size:13px}
 #welcome .quick-action small{font-size:11px}
 @media(max-height:740px){#welcome .home-title h1{font-size:28px;margin-bottom:12px}#welcome .today-card{padding:13px 16px}#welcome .today-main{margin:9px 0}#welcome .quick-action{min-height:90px}}
-</style></head><body><main>
+\n#plan-screen .settings-card .primary{width:100%;margin-top:12px}\n</style></head><body><main>
 <header class="app-header"><div class="app-identity"><div class="wordmark" aria-label="I Me Mine"><span>I</span><span>me</span><span>mine</span></div></div><button class="header-plus" id="view-upgrade" aria-label="Explore Plus">PLUS ✦</button></header>
 <section id="welcome" class="screen"><div class="home-title"><h1>You know better.<br><em>Now do better.</em></h1></div><div class="today-card"><div class="eyebrow">TODAY'S PRACTICE</div><div class="today-main"><div><h2>Ready for a round?</h2><p>A little practice makes a difference.</p></div><div class="round-ring"><strong>10</strong><small>questions</small></div></div><button class="primary" id="home-practice">Start Practice →</button></div>
  <div class="welcome-heading hide"><span class="eyebrow">YOUR PRACTICE</span><h1>Ready for a quick round?</h1><p>Ten questions. One little win at a time.</p></div>
@@ -39,6 +39,7 @@
 </section>
 <section id="practice" class="screen hide"><div class="eyebrow">PRACTICE YOUR WAY</div><h1 class="practice-title">What shall we <em>work on?</em></h1><p class="practice-description">Choose a focus, or let us mix things up.</p><button class="practice-tile" id="practice-mix"><span class="tile-icon">✦</span><span class="tile-copy"><strong>Mix it up</strong><small>10 questions across all topics</small></span><span class="tile-arrow">→</span></button><div class="section-title"><h2>Explore grammar</h2><span id="topic-count"></span></div><div class="practice-topics" id="practice-topics"></div></section>
 <section id="progress-screen" class="screen hide"><div class="eyebrow">YOUR PROGRESS</div><h1 class="practice-title">Know what you've mastered.<br><em>Know what's next.</em></h1><p class="practice-description">Your practice history, strengths and areas to work on.</p><button class="primary" id="progress-plan">Work my plan → ✦ PLUS</button><p class="notice" id="plan-status">Personalized practice plan · Plus feature</p><h2>Progress over time</h2><p id="progress-caption"></p><div class="chart-bars" id="progress-bars"></div><h2>My Weak Spots</h2><div id="weak-list"></div></section>
+<section id="plan-screen" class="screen hide"><button class="screen-back" id="plan-back">← Progress</button><div class="eyebrow">YOUR PLUS PLAN</div><h1 class="practice-title">Your next <em>best step.</em></h1><p class="practice-description" id="plan-intro"></p><div id="plan-cards"></div><p class="notice">Recommendations adapt as you practice. Mastery means answering correctly on different days.</p></section>
 <section id="settings-screen" class="screen hide"><div class="eyebrow">PREFERENCES</div><h1 class="practice-title">Settings</h1><div class="settings-card"><h2>Appearance</h2><div class="appearance-setting"><label for="theme-select">Theme</label><select id="theme-select"><option value="system">Match device</option><option value="light">Light</option><option value="dark">Dark</option></select><p>Use your device setting or choose a theme.</p></div></div><div class="settings-card" style="margin-top:16px"><div class="eyebrow">I ME MINE PLUS</div><h2>Make progress you can see.</h2><p>Personalized practice, focused sessions, and deeper progress insights. All regular grammar practice stays free.</p><button class="primary" id="settings-plus">Upgrade to Plus →</button><p class="notice" id="settings-plus-status">One-time purchase · No subscription</p></div><div class="settings-card" style="margin-top:16px"><h2>About I Me Mine</h2><p><strong>You know better. Do better.</strong></p><p>English grammar practice</p></div></section>
 <section id="upgrade" class="screen hide"><button class="screen-back" id="back">← Back</button><div class="plus-screen"><div class="eyebrow">I ME MINE PLUS</div><h1>Make progress <em>you can see.</em></h1><p>Get personalized practice plans, deeper progress insights, and mastery tracking. All grammar practice stays free.</p><div class="plus-benefits"><div>✓ Your personal practice plan, ranked by accuracy</div><div>✓ Focused sessions for recurring mistakes</div><div>✓ Mastery tracking across multiple sessions</div></div><div class="plus-preview"><strong>Your next best topic</strong><p id="plus-recommendation">Complete a practice round to reveal your learning priorities.</p><button class="secondary" id="plus-plan">Start my personalized plan →</button></div><div class="price"><strong id="plus-price">Price loading…</strong><small>One-time purchase · No subscription</small></div><button class="primary" id="buy" disabled>Checking App Store…</button><button class="secondary" id="restore">Restore purchases</button><p class="notice" id="store-status">Connecting to Apple purchases…</p><p class="notice" id="purchase-note" role="status"></p></div></section>
 <section id="game" class="screen hide"><button class="screen-back" id="quit">← Home</button><div class="game-panel"><div class="top"><span id="counter"></span><span id="score"></span></div><div class="progress"><div class="fill" id="fill"></div></div><div class="eyebrow" id="topic"></div><div class="prompt" id="prompt"></div><div class="choices" id="choices"></div><div id="feedback" class="feedback hide" aria-live="polite"></div><button class="primary hide" id="next">Next question →</button></div></section>
@@ -62,16 +63,36 @@ let selectedTopic="Mixed practice",round=[],index=0,points=0,answered=false,mode
 
 
 function isUnlocked(){return purchaseBridge?.isUnlocked?.()===true}
-function recommendedTopic(){
- const stats=store.get("imm-stats",{});
- const ranked=Object.entries(stats).filter(([,s])=>s.correct+s.wrong>=2).map(([topic,s])=>({topic,accuracy:s.correct/(s.correct+s.wrong),attempts:s.correct+s.wrong})).sort((a,b)=>a.accuracy-b.accuracy||b.attempts-a.attempts);
- return ranked[0]?.topic||null;
+function buildPersonalPlan(){
+ const stats=store.get("imm-stats",{}),learning=store.get("imm-learning",{});
+ const rows=TOPICS.filter(t=>t!=="Mixed practice").map(topic=>{
+  const questions=QUESTIONS.filter(q=>q.t===topic),attempted=questions.filter(q=>(learning[q.id]?.attempts||0)>0);
+  const mastered=questions.filter(q=>{const v=learning[q.id];return v&&v.streak>=2&&(v.successDays||[]).length>=2}).length;
+  const s=stats[topic]||{correct:0,wrong:0},attempts=s.correct+s.wrong,accuracy=attempts?s.correct/attempts:null;
+  const unseen=questions.filter(q=>!learning[q.id]?.attempts),hard=questions.filter(q=>q.level==="B1"&&!learning[q.id]?.attempts);
+  let priority,reason,focus;
+  if(attempts>=2&&accuracy<.8){priority=0;reason=topic+": "+Math.round(accuracy*100)+"% correct. Let's strengthen this skill.";focus="Strengthen";}
+  else if(hard.length&&attempts>=2&&accuracy>=.9){priority=1;reason=topic+": strong accuracy. Try more advanced, unfamiliar questions.";focus="Challenge";}
+  else if(unseen.length){priority=2;reason=topic+": "+unseen.length+" questions you haven't tried yet.";focus="Explore";}
+  else {priority=3;reason=topic+": revisit across different days to confirm mastery.";focus="Consolidate";}
+  return {topic,priority,reason,focus,attempts,mastered,total:questions.length,accuracy};
+ });
+ return rows.sort((a,b)=>a.priority-b.priority||(a.accuracy??1)-(b.accuracy??1)||a.attempts-b.attempts).slice(0,3);
+}
+function renderPersonalPlan(){
+ const plans=buildPersonalPlan(),root=$("plan-cards");root.replaceChildren();
+ const learning=store.get("imm-learning",{}),attempted=Object.values(learning).filter(v=>v.attempts>0).length;
+ $("plan-intro").textContent=attempted===0?"Start with these topics. Your plan will become more specific as you answer questions.":plans.some(p=>p.priority===0)?"We'll focus on areas that need practice, then build confidence.":"Great accuracy! Let's stretch your skills with unfamiliar questions and confirm mastery over time.";
+ plans.forEach((p,i)=>{const card=document.createElement("div");card.className="settings-card";card.style.marginBottom="14px";
+ const title=document.createElement("h2");title.textContent=(i+1)+". "+p.topic;
+ const reason=document.createElement("p");reason.textContent=p.reason;
+ const progress=document.createElement("p");progress.className="notice";progress.textContent=p.mastered+" of "+p.total+" questions mastered across different days";
+ const btn=document.createElement("button");btn.className="primary";btn.textContent=p.focus+" "+p.topic+" →";btn.onclick=()=>{selectTopic(p.topic);start("plan")};
+ card.append(title,reason,progress,btn);root.append(card)});
 }
 function workMyPlan(){
  if(!isUnlocked()){show("upgrade");return}
- const topic=recommendedTopic();
- if(!topic){alert("Play a few rounds first to build your personalized plan.");return}
- selectTopic(topic);start("normal");
+ show("plan-screen");
 }
 function roundsPlayed(){return store.get("imm-free-rounds",0)}
 function refreshOffer(){
@@ -87,13 +108,14 @@ const store={
 function shuffle(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 let currentTab="welcome";
 function show(id){
- ["welcome","practice","progress-screen","settings-screen","game","finish","upgrade"].forEach(s=>$(s).classList.toggle("hide",s!==id));
+ ["welcome","practice","progress-screen","settings-screen","game","finish","upgrade","plan-screen"].forEach(s=>$(s).classList.toggle("hide",s!==id));
  const isTab=["welcome","practice","progress-screen","settings-screen"].includes(id);
- const showNav=isTab||id==="upgrade";
+ const showNav=isTab||id==="upgrade"||id==="plan-screen";
  $("bottom-nav").classList.toggle("hide",!showNav);
  if(isTab){currentTab=id;document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));}
  if(id==="welcome"||id==="progress-screen")updateDashboard();
- if(id==="upgrade"){const topic=recommendedTopic();$("plus-recommendation").textContent=topic?"Based on your answers, your next focus is "+topic+".":"Complete a few questions to discover your learning priorities.";$("plus-plan").textContent=isUnlocked()?"Work my plan →":"Unlock Plus to work my plan →";}
+ if(id==="upgrade"){const plan=buildPersonalPlan();$("plus-recommendation").textContent=plan[0]?.reason||"Start practicing to build your personal plan.";$("plus-plan").textContent=isUnlocked()?"View my plan →":"Unlock Plus to view my plan →";}
+ if(id==="plan-screen")renderPersonalPlan();
  document.scrollingElement.scrollTop=0;
  window.scrollTo?.(0,0);
 }
@@ -113,10 +135,11 @@ function start(newMode="normal"){
  const mistakes=store.get("imm-mistakes",[]);
  const stats=store.get("imm-stats",{});
  let pool=QUESTIONS.filter(q=>selectedTopic==="Mixed practice"||q.t===selectedTopic);
+ if(mode==="plan"){const learning=store.get("imm-learning",{});const unseen=pool.filter(q=>!learning[q.id]?.attempts);const challenge=unseen.filter(q=>q.level==="B1");const others=unseen.filter(q=>q.level!=="B1");const seen=pool.filter(q=>learning[q.id]?.attempts).sort((a,b)=>(learning[a.id]?.streak||0)-(learning[b.id]?.streak||0));pool=[...challenge,...others,...seen].slice(0,Math.max(10,Math.min(25,pool.length)));}
  if(mode==="review")pool=QUESTIONS.filter(q=>mistakes.includes(q.id));
  if(mode==="weak"){const weakTopics=Object.entries(stats).filter(([,s])=>s.wrong>0).sort((a,b)=>b[1].wrong-a[1].wrong).slice(0,3).map(([topic])=>topic);pool=QUESTIONS.filter(q=>weakTopics.includes(q.t));}
  if(!pool.length){alert(mode==="review"?"No mistakes to review yet.":"Complete some practice first to discover your weak spots.");return}
- const historyKey="imm-recent-"+(mode==="normal"?selectedTopic:mode);
+ const historyKey="imm-recent-"+((mode==="normal"||mode==="plan")?selectedTopic:mode);
  const recent=store.get(historyKey,[]);
  const count=Math.min(10,pool.length);
  const recentSet=new Set(recent);
@@ -139,7 +162,7 @@ function start(newMode="normal"){
 }
 function render(){
  answered=false;const x=round[index];
- $("counter").textContent=(mode==="normal"?selectedTopic:mode==="review"?"Review mistakes":"Weak spots")+" · "+(index+1)+" of "+round.length;
+ $("counter").textContent=(mode==="normal"?selectedTopic:mode==="review"?"Review mistakes":mode==="plan"?"My Plus plan":"Weak spots")+" · "+(index+1)+" of "+round.length;
  $("score").textContent=points+" correct";
  $("fill").style.width=(index/round.length*100)+"%";
  $("topic").textContent="Complete the sentence · "+x.t;
@@ -185,6 +208,7 @@ $("next").onclick=()=>{index++;if(index===round.length)finish();else render()};
 $("home-practice").onclick=()=>{selectTopic("Mixed practice");start("normal")};
 $("practice-mix").onclick=()=>{selectTopic("Mixed practice");start("normal")};
 $("progress-plan").onclick=workMyPlan;
+$("plan-back").onclick=()=>show("progress-screen");
 $("plus-plan").onclick=workMyPlan;
 $("settings-plus").onclick=()=>show("upgrade");
 $("theme-select").value=["system","light","dark"].includes(savedTheme)?savedTheme:"system";
