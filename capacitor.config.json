@@ -1,0 +1,11 @@
+{
+  "appId": "site.imemine.app",
+  "appName": "I Me Mine",
+  "webDir": "dist",
+  "server": {
+    "iosScheme": "capacitor"
+  },
+  "ios": {
+    "contentInset": "automatic"
+  }
+}
