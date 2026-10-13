@@ -6,6 +6,25 @@
   html, body { overscroll-behavior-y: none; }
   html { overflow-anchor: none; }
 }
+
+/* Compact iPhone home: keep the primary actions visible above the bottom navigation.
+   Journey is available in Progress; Plus remains in the header and Settings. */
+#welcome{padding-top:12px;padding-bottom:calc(env(safe-area-inset-bottom) + 88px)}
+#welcome .home-title h1{font-size:clamp(29px,7vw,39px);line-height:1.07;margin:8px 0 17px}
+#welcome .today-card{padding:17px 19px;margin-bottom:12px;border-radius:19px}
+#welcome .today-main{margin:13px 0 14px}
+#welcome .today-main h2{font-size:21px;margin-bottom:4px}
+#welcome .today-main p{font-size:12px}
+#welcome .round-ring{width:78px;height:78px;flex-basis:78px;border-width:6px}
+#welcome .round-ring strong{font-size:26px}
+#welcome .round-ring small{font-size:10px}
+#welcome .today-card .primary{min-height:48px;padding:11px}
+#welcome .quick-actions{gap:10px;margin:0}
+#welcome .quick-action{min-height:105px;padding:12px;border-radius:17px;gap:3px}
+#welcome .quick-icon{width:31px;height:31px;font-size:20px;margin-bottom:3px;border-radius:9px}
+#welcome .quick-action strong{font-size:13px}
+#welcome .quick-action small{font-size:11px}
+@media(max-height:740px){#welcome .home-title h1{font-size:28px;margin-bottom:12px}#welcome .today-card{padding:13px 16px}#welcome .today-main{margin:9px 0}#welcome .quick-action{min-height:90px}}
 </style></head><body><main>
 <header class="app-header"><div class="app-identity"><div class="wordmark" aria-label="I Me Mine"><span>I</span><span>me</span><span>mine</span></div></div><button class="header-plus" id="view-upgrade" aria-label="Explore Plus">PLUS ✦</button></header>
 <section id="welcome" class="screen"><div class="home-title"><h1>You know better.<br><em>Now do better.</em></h1></div><div class="today-card"><div class="eyebrow">TODAY'S PRACTICE</div><div class="today-main"><div><h2>Ready for a round?</h2><p>A little practice makes a difference.</p></div><div class="round-ring"><strong>10</strong><small>questions</small></div></div><button class="primary" id="home-practice">Start Practice →</button></div>
@@ -15,8 +34,8 @@
  <div class="section-title hide"><h2>Choose a topic</h2><span>Practice your way</span></div>
  <div class="topic-grid hide" id="topic-picker" role="group" aria-label="Choose a grammar topic"></div>
  <button class="primary hide" id="topic-start">Practice selected topic →</button>
- <div class="journey"><div class="eyebrow">YOUR JOURNEY</div><p><strong id="rounds-completed">0</strong> rounds completed</p></div><div class="home-progress hide"><span id="best">Your best: —</span><span id="free-status">Grammar practice is free</span></div>
- <button class="plus-banner" id="plus-banner"><span><strong>Make progress you can see</strong><small>Explore I Me Mine Plus</small></span></button>
+ <div class="journey hide"><div class="eyebrow">YOUR JOURNEY</div><p><strong id="rounds-completed">0</strong> rounds completed</p></div><div class="home-progress hide"><span id="best">Your best: —</span><span id="free-status">Grammar practice is free</span></div>
+ <button class="plus-banner hide" id="plus-banner"><span><strong>Make progress you can see</strong><small>Explore I Me Mine Plus</small></span></button>
 </section>
 <section id="practice" class="screen hide"><div class="eyebrow">PRACTICE YOUR WAY</div><h1 class="practice-title">What shall we <em>work on?</em></h1><p class="practice-description">Choose a focus, or let us mix things up.</p><button class="practice-tile" id="practice-mix"><span class="tile-icon">✦</span><span class="tile-copy"><strong>Mix it up</strong><small>10 questions across all topics</small></span><span class="tile-arrow">→</span></button><div class="section-title"><h2>Explore grammar</h2><span id="topic-count"></span></div><div class="practice-topics" id="practice-topics"></div></section>
 <section id="progress-screen" class="screen hide"><div class="eyebrow">YOUR PROGRESS</div><h1 class="practice-title">Know what you've mastered.<br><em>Know what's next.</em></h1><p class="practice-description">Your practice history, strengths and areas to work on.</p><button class="primary" id="progress-plan">Work my plan → ✦ PLUS</button><p class="notice" id="plan-status">Personalized practice plan · Plus feature</p><h2>Progress over time</h2><p id="progress-caption"></p><div class="chart-bars" id="progress-bars"></div><h2>My Weak Spots</h2><div id="weak-list"></div></section>
