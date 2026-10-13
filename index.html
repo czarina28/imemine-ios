@@ -124,6 +124,11 @@ function render(){
 function choose(i){
  if(answered)return;answered=true;const x=round[index];
  if(i===x.c)points++;
+ const learning=store.get("imm-learning",{});
+ const previous=learning[x.id]||{attempts:0,correct:0,misses:0,streak:0,successDays:[]};
+ const right=i===x.c,day=new Date().toISOString().slice(0,10);
+ learning[x.id]={attempts:previous.attempts+1,correct:previous.correct+(right?1:0),misses:previous.misses+(right?0:1),streak:right?previous.streak+1:0,successDays:right?[...new Set([...previous.successDays,day])].slice(-20):previous.successDays};
+ store.set("imm-learning",learning);
  const stats=store.get("imm-stats",{});
  const current=stats[x.t]||{correct:0,wrong:0};
  if(i===x.c)current.correct++;else current.wrong++;
