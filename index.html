@@ -82,16 +82,24 @@ function start(newMode="normal"){
  if(mode==="review")pool=QUESTIONS.filter(q=>mistakes.includes(q.id));
  if(mode==="weak"){const weakTopics=Object.entries(stats).filter(([,s])=>s.wrong>0).sort((a,b)=>b[1].wrong-a[1].wrong).slice(0,3).map(([topic])=>topic);pool=QUESTIONS.filter(q=>weakTopics.includes(q.t));}
  if(!pool.length){alert(mode==="review"?"No mistakes to review yet.":"Complete some practice first to discover your weak spots.");return}
- const recent=store.get("imm-recent-"+selectedTopic,[]);
- const fresh=shuffle(pool.filter(q=>!recent.includes(q.id)));
- const old=shuffle(pool.filter(q=>recent.includes(q.id)));
- // Mixed practice favors approachable questions, with occasional harder ones.
- const pick=selectedTopic==="Mixed practice"&&mode==="normal"
-  ? [...fresh.filter(q=>q.level==="A1").slice(0,5),...fresh.filter(q=>q.level==="A2").slice(0,3),...fresh.filter(q=>q.level==="B1").slice(0,2)]
-  : fresh.slice(0,10);
- const selected=[...pick,...fresh,...old].filter((q,i,a)=>a.findIndex(x=>x.id===q.id)===i).slice(0,10);
- round=shuffle(selected).map(q=>{const order=shuffle(q.a.map((_,i)=>i));return {...q,a:order.map(i=>q.a[i]),c:order.indexOf(q.c)}});
- store.set("imm-recent-"+selectedTopic,[...new Set([...round.map(q=>q.id),...recent])].slice(0,Math.max(10,pool.length-10)));
+ const historyKey="imm-recent-"+(mode==="normal"?selectedTopic:mode);
+ const recent=store.get(historyKey,[]);
+ const count=Math.min(10,pool.length);
+ const recentSet=new Set(recent);
+ const difficulty={A1:0,A2:1,B1:2};
+ const groups=new Map();
+ for(const q of pool){const key=selectedTopic==="Mixed practice"||mode!=="normal"?q.t:q.level;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(q)}
+ for(const [key,items] of groups)groups.set(key,shuffle(items).sort((x,y)=>Number(recentSet.has(x.id))-Number(recentSet.has(y.id))));
+ const selected=[],keys=shuffle([...groups.keys()]);
+ while(selected.length<count){let added=false;for(const key of keys){const q=groups.get(key).shift();if(q){selected.push(q);added=true;if(selected.length===count)break}}if(!added)break}
+ // Most questions are approachable, with a couple of harder questions.
+ if(mode==="normal"&&selectedTopic==="Mixed practice"){
+  const hard=selected.filter(q=>q.level==="B1");
+  if(hard.length>2){const keep=new Set(hard.slice(0,2).map(q=>q.id));const easy=shuffle(pool.filter(q=>q.level!=="B1"&&!selected.some(s=>s.id===q.id))).sort((x,y)=>Number(recentSet.has(x.id))-Number(recentSet.has(y.id)));for(let i=selected.length-1;i>=0;i--){if(selected[i].level==="B1"&&!keep.has(selected[i].id)&&easy.length)selected[i]=easy.shift()}}
+ }
+ selected.sort((x,y)=>(difficulty[x.level]??1)-(difficulty[y.level]??1));
+ round=selected.map(q=>{const order=shuffle(q.a.map((_,i)=>i));return {...q,a:order.map(i=>q.a[i]),c:order.indexOf(q.c)}});
+ store.set(historyKey,[...new Set([...round.map(q=>q.id),...recent])].slice(0,Math.min(pool.length,Math.max(30,Math.floor(pool.length*.6)))));
  index=0;points=0;show("game");render();
 }
 function render(){
@@ -109,6 +117,12 @@ function render(){
 function choose(i){
  if(answered)return;answered=true;const x=round[index];
  if(i===x.c)points++;
+ const stats=store.get("imm-stats",{});
+ const current=stats[x.t]||{correct:0,wrong:0};
+ if(i===x.c)current.correct++;else current.wrong++;
+ stats[x.t]=current;store.set("imm-stats",stats);
+ const mistakes=store.get("imm-mistakes",[]);
+ store.set("imm-mistakes",i===x.c?mistakes.filter(id=>id!==x.id):[...new Set([...mistakes,x.id])].slice(-200));
  [...$("choices").children].forEach((b,j)=>{b.disabled=true;if(j===x.c)b.classList.add("correct");else if(j===i)b.classList.add("wrong")});
  $("score").textContent=points+" correct";
  $("feedback").textContent=(i===x.c?"✓ That's right! ":"Not quite. ")+x.e;
@@ -123,7 +137,7 @@ function finish(){
  if(points>best)store.set("imm-best-"+selectedTopic,points);
  const sessions=store.get("imm-sessions",[]);sessions.push({date:Date.now(),score:points,total:round.length,topic:selectedTopic});store.set("imm-sessions",sessions.slice(-100));
  $("result").textContent=points+" / "+round.length;
- $("message").textContent=points>=8?"Brilliant! You've got this.":points>=5?"Nice work! Every round makes you stronger.":"Keep going. Learning takes practice.";
+ $("message").textContent=points/round.length>=.8?"Brilliant! You've got this.":points/round.length>=.5?"Nice work! Every round makes you stronger.":"Keep going. Learning takes practice.";
  show("finish");
  $("again").textContent="Play again →";
 }
