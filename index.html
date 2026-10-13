@@ -74,6 +74,12 @@ function selectTopic(value){selectedTopic=value;document.querySelectorAll("[data
 function updateBest(){const best=store.get("imm-best-"+selectedTopic,null);$("best").textContent=best===null?"No rounds played yet":"Your best: "+best+" / 10"}
 const ICONS=["✦","Aa","◈","↔","?","⌁","∑","≡","!"];
 TOPICS.forEach((t,i)=>{const tile=document.createElement("button");tile.className="grammar-tile";tile.innerHTML='<span class="grammar-icon"></span><strong></strong><small></small>';tile.querySelector(".grammar-icon").textContent=ICONS[i%ICONS.length];tile.querySelector("strong").textContent=t;tile.querySelector("small").textContent=QUESTIONS.filter(q=>q.t===t).length+" questions";tile.onclick=()=>{selectTopic(t);start("normal")};if(t!=="Mixed practice")$("practice-topics").append(tile);const b=document.createElement("button");b.className="topic-choice";b.dataset.topic=t;b.textContent=t;b.setAttribute("aria-pressed","false");b.onclick=()=>selectTopic(t);$("topic-picker").append(b)});
+function practiceStage(){
+ const sessions=store.get("imm-sessions",[]).filter(s=>s.mode==="normal"&&s.topic==="Mixed practice"&&s.total>=8).slice(-3);
+ if(sessions.length<2)return 1;
+ const correct=sessions.reduce((n,s)=>n+s.score,0),total=sessions.reduce((n,s)=>n+s.total,0);
+ return correct/total>=.85?3:correct/total>=.7?2:1;
+}
 function start(newMode="normal"){
  mode=newMode;
  const mistakes=store.get("imm-mistakes",[]);
@@ -87,13 +93,14 @@ function start(newMode="normal"){
  const count=Math.min(10,pool.length);
  const recentSet=new Set(recent);
  const difficulty={A1:0,A2:1,B1:2};
+ const stage=practiceStage();
  const groups=new Map();
  for(const q of pool){const key=selectedTopic==="Mixed practice"||mode!=="normal"?q.t:q.level;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(q)}
- for(const [key,items] of groups)groups.set(key,shuffle(items).sort((x,y)=>Number(recentSet.has(x.id))-Number(recentSet.has(y.id))));
+ for(const [key,items] of groups)groups.set(key,shuffle(items).sort((x,y)=>Number(recentSet.has(x.id))-Number(recentSet.has(y.id))||Math.abs(difficulty[x.level]-(stage-1))-Math.abs(difficulty[y.level]-(stage-1))));
  const selected=[],keys=shuffle([...groups.keys()]);
  while(selected.length<count){let added=false;for(const key of keys){const q=groups.get(key).shift();if(q){selected.push(q);added=true;if(selected.length===count)break}}if(!added)break}
  // Most questions are approachable, with a couple of harder questions.
- if(mode==="normal"&&selectedTopic==="Mixed practice"){
+ if(mode==="normal"&&selectedTopic==="Mixed practice"&&stage===1){
   const hard=selected.filter(q=>q.level==="B1");
   if(hard.length>2){const keep=new Set(hard.slice(0,2).map(q=>q.id));const easy=shuffle(pool.filter(q=>q.level!=="B1"&&!selected.some(s=>s.id===q.id))).sort((x,y)=>Number(recentSet.has(x.id))-Number(recentSet.has(y.id)));for(let i=selected.length-1;i>=0;i--){if(selected[i].level==="B1"&&!keep.has(selected[i].id)&&easy.length)selected[i]=easy.shift()}}
  }
@@ -135,7 +142,7 @@ function finish(){
  refreshOffer();
  const best=store.get("imm-best-"+selectedTopic,0);
  if(points>best)store.set("imm-best-"+selectedTopic,points);
- const sessions=store.get("imm-sessions",[]);sessions.push({date:Date.now(),score:points,total:round.length,topic:selectedTopic});store.set("imm-sessions",sessions.slice(-100));
+ const sessions=store.get("imm-sessions",[]);sessions.push({date:Date.now(),score:points,total:round.length,topic:selectedTopic,mode});store.set("imm-sessions",sessions.slice(-100));
  $("result").textContent=points+" / "+round.length;
  $("message").textContent=points/round.length>=.8?"Brilliant! You've got this.":points/round.length>=.5?"Nice work! Every round makes you stronger.":"Keep going. Learning takes practice.";
  show("finish");
