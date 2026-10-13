@@ -4,8 +4,8 @@
 :root{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#0f172a;background:#f8f7f3;font-synthesis:none;-webkit-font-smoothing:antialiased;--blue:#2563eb;--pink:#ec4899;--line:#e2e8f0;--muted:#64748b}*{box-sizing:border-box}body{margin:0}main{max-width:680px;margin:auto;min-height:100svh;padding:calc(env(safe-area-inset-top) + 42px) 22px calc(env(safe-area-inset-bottom) + 28px)}.brand{display:flex;align-items:center;border-bottom:1px solid var(--line);padding-bottom:18px}.brand img{width:70px;height:70px;object-fit:cover;border-radius:17px}.eyebrow{font-size:11px;letter-spacing:2px;font-weight:850;color:var(--blue);text-transform:uppercase;margin-top:26px}.hero{font-size:clamp(36px,9vw,59px);letter-spacing:-2.3px;line-height:1.1;margin:15px 0}.hero em{font-style:normal;color:var(--blue)}p{color:var(--muted);font-size:15px;line-height:1.6}.card{margin-top:18px}.home-hero{padding:22px 0 8px}.home-hero p{margin:0 0 22px}.primary{width:100%;min-height:64px;border:0;border-radius:16px;background:#0f172a;color:#fff;font:inherit;font-size:18px;font-weight:800;padding:18px 22px;cursor:pointer;text-align:left}.primary:hover{background:#1e40af}.primary:disabled{opacity:.55;cursor:not-allowed}.secondary{width:100%;min-height:54px;border:1px solid var(--line);background:#fff;border-radius:12px;color:#334155;font:inherit;font-weight:750;margin-top:12px;cursor:pointer}.stat{font-size:13px;color:var(--muted);margin:12px 0}.topic-grid{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;display:grid;grid-template-columns:1fr;margin:18px 0}.topic-choice{width:100%;border:0;border-bottom:1px solid var(--line);background:#fff;text-align:left;padding:17px 19px;color:#0f172a;font:inherit;font-weight:750;font-size:16px;cursor:pointer}.topic-choice:last-child{border-bottom:0}.topic-choice.active{background:#eff6ff;color:#1d4ed8;border-left:4px solid var(--blue);padding-left:15px}.topic-choice:hover{background:#f1f5f9}.small{text-align:center;font-size:11px;color:#94a3b8;margin:35px 0}.hide{display:none!important}.top{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;font-weight:800;letter-spacing:.4px}.progress{height:6px;background:var(--line);border-radius:99px;margin:20px 0 32px;overflow:hidden}.fill{height:100%;background:var(--blue);transition:width .2s}.prompt{font-size:clamp(26px,6vw,35px);font-weight:650;line-height:1.45;margin:27px 0 32px}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.choice{min-height:72px;border:1.5px solid #cbd5e1;border-radius:11px;background:#fff;color:#0f172a;font:inherit;font-size:20px;font-weight:650;padding:12px;cursor:pointer}.choice.correct{background:#e4f2e6;border-color:#4c9467;color:#215b37}.choice.wrong{background:#fae5df;border-color:#cb634b;color:#9c3725}.choice:disabled{cursor:default}.feedback{border-left:3px solid var(--blue);background:#eff6ff;padding:15px 17px;margin-top:20px;border-radius:0 10px 10px 0;font-size:15px;line-height:1.65;color:#334155}#game .card,#finish .card,#upgrade .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:clamp(20px,5vw,32px);margin-top:30px}#game .eyebrow{margin:0}.premium{background:#fff!important}.premium h2{font-size:29px;letter-spacing:-1px}.pill{display:inline-block;border-radius:99px;background:#eff6ff;color:#1d4ed8;padding:9px 13px;font-size:13px;font-weight:800}.notice{font-size:12px;color:var(--muted);line-height:1.5;margin-top:17px}.premium .primary{margin-top:20px}h2{font-size:24px;letter-spacing:-.6px}button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}@media(max-width:420px){main{padding-left:18px;padding-right:18px}.brand img{width:60px;height:60px}.home-hero{padding-top:12px}.hero{font-size:clamp(35px,9vw,45px)}.choices{gap:10px}.choice{font-size:18px;padding:10px 6px}}@media(max-width:350px){.choices{grid-template-columns:1fr}}
 </style></head><body><main>
 <div class="brand"><img src="app-icon.png" alt="I Me Mine" width="80" height="80" style="border-radius:19px;object-fit:cover"></div>
-<section id="welcome"><div class="home-hero"><div class="eyebrow">ENGLISH, MADE LEARNABLE</div><h1 class="hero">You know better.<br><em>Now do better.</em></h1><p>You know the rules. Now make them automatic.</p><button class="primary" id="start">Practice ↗</button><p class="stat">10 questions · all topics · quick explanations</p></div><div class="card"><h2>Choose a topic</h2><p>Or jump straight into mixed practice.</p><div class="topic-grid" id="topic-picker" role="group" aria-label="Choose a grammar topic"></div><div class="stat" id="best">Your best: —</div><div class="stat" id="free-status"></div><button class="primary" id="start">Let's play →</button><button class="secondary" id="view-upgrade">Unlock everything ✨</button></div></section>
-<section id="upgrade" class="hide"><div class="card premium"><div class="eyebrow">I Me Mine Plus</div><h2>Keep the good streak going.</h2><p>Unlock unlimited grammar practice across every topic, with no subscriptions and no ads.</p><div class="pill">One-time purchase · €4.99 planned</div><p class="notice">Purchases are not enabled in this browser preview. The final price and purchase will be handled through Apple's App Store.</p><button class="primary" id="buy" disabled>Purchase available in iPhone app soon</button><button class="secondary" id="restore">Restore purchases</button><button class="secondary" id="back">← Back to practice</button><div class="notice" id="purchase-note" role="status"></div></div></section>
+<section id="welcome"><div class="home-hero"><div class="eyebrow">ENGLISH, MADE LEARNABLE</div><h1 class="hero">You know better.<br><em>Now do better.</em></h1><p>You know the rules. Now make them automatic.</p><button class="primary" id="start">Practice ↗</button><p class="stat">10 questions · all topics · quick explanations</p></div><div class="card"><h2>Choose a topic</h2><p>Or jump straight into mixed practice.</p><div class="topic-grid" id="topic-picker" role="group" aria-label="Choose a grammar topic"></div><div class="stat" id="best">Your best: —</div><div class="stat" id="free-status"></div><button class="secondary" id="review">Review mistakes · <span id="mistake-count">0</span> ↗</button><button class="secondary" id="weak">Target weak spots ↗</button><button class="primary" id="topic-start">Practice selected topic ↗</button><button class="secondary" id="view-upgrade">Explore Plus ✨</button></div></section>
+<section id="upgrade" class="hide"><div class="card premium"><div class="eyebrow">I Me Mine Plus</div><h2>Keep the good streak going.</h2><p>Get personalized practice plans, deeper progress insights, and mastery tracking. All grammar practice stays free.</p><div class="pill">One-time purchase · €4.99 planned</div><p class="notice">Purchases are not enabled in this browser preview. The final price and purchase will be handled through Apple's App Store.</p><button class="primary" id="buy" disabled>Purchase available in iPhone app soon</button><button class="secondary" id="restore">Restore purchases</button><button class="secondary" id="back">← Back to practice</button><div class="notice" id="purchase-note" role="status"></div></div></section>
 <section id="game" class="hide"><div class="card"><div class="top"><span id="counter"></span><span id="score"></span></div><div class="progress"><div class="fill" id="fill"></div></div><div class="eyebrow" id="topic" style="margin:0"></div><div class="prompt" id="prompt"></div><div class="choices" id="choices"></div><div id="feedback" class="feedback hide" aria-live="polite"></div><button class="primary hide" id="next">Next question →</button><button class="secondary" id="quit">← Choose topic</button></div></section>
 <section id="finish" class="hide"><div class="card"><div class="eyebrow">Round complete</div><h1 class="hero" id="result"></h1><p id="message"></p><button class="primary" id="again">Play again →</button><button class="secondary" id="home">Choose another topic</button></div></section>
 <div class="small">I Me Mine · Practice makes progress.</div></main>
@@ -13,15 +13,16 @@
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-let selectedTopic="Mixed practice",round=[],index=0,points=0,answered=false;
-const FREE_ROUNDS=10;
+let selectedTopic="Mixed practice",round=[],index=0,points=0,answered=false,mode="normal";
+
 const purchaseBridge=window.ImeMinePurchases||null;
 function isUnlocked(){return purchaseBridge?.isUnlocked?.()===true}
 function roundsPlayed(){return store.get("imm-free-rounds",0)}
 function refreshOffer(){
- const remaining=Math.max(0,FREE_ROUNDS-roundsPlayed());
- $("free-status").textContent=isUnlocked()?"Unlimited practice unlocked":remaining+" free round"+(remaining===1?"":"s")+" remaining";
- $("start").textContent=remaining===0&&!isUnlocked()?"See unlimited practice →":"Let's play →";
+ $("free-status").textContent="Grammar practice is free · No account needed";
+ $("mistake-count").textContent=store.get("imm-mistakes",[]).length;
+ $("start").textContent="Practice ↗";
+ $("topic-start").textContent="Practice selected topic ↗";
 }
 const store={
  get(key,fallback){try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}},
@@ -33,14 +34,19 @@ const TOPICS=["Mixed practice",...new Set(QUESTIONS.map(q=>q.t))];
 function selectTopic(value){selectedTopic=value;document.querySelectorAll("[data-topic]").forEach(b=>{const active=b.dataset.topic===value;b.classList.toggle("active",active);b.setAttribute("aria-pressed",String(active))});updateBest()}
 function updateBest(){const best=store.get("imm-best-"+selectedTopic,null);$("best").textContent=best===null?"No rounds played yet":"Your best: "+best+" / 10"}
 TOPICS.forEach(t=>{const b=document.createElement("button");b.className="topic-choice";b.dataset.topic=t;b.textContent=t;b.setAttribute("aria-pressed","false");b.onclick=()=>selectTopic(t);$("topic-picker").append(b)});
-function start(){
- if(!isUnlocked()&&roundsPlayed()>=FREE_ROUNDS){show("upgrade");return}
- const pool=QUESTIONS.filter(q=>selectedTopic==="Mixed practice"||q.t===selectedTopic);
+function start(newMode="normal"){
+ mode=newMode;
+ const mistakes=store.get("imm-mistakes",[]);
+ const stats=store.get("imm-stats",{});
+ let pool=QUESTIONS.filter(q=>selectedTopic==="Mixed practice"||q.t===selectedTopic);
+ if(mode==="review")pool=QUESTIONS.filter(q=>mistakes.includes(q.id));
+ if(mode==="weak"){const weakTopics=Object.entries(stats).filter(([,s])=>s.wrong>0).sort((a,b)=>b[1].wrong-a[1].wrong).slice(0,3).map(([topic])=>topic);pool=QUESTIONS.filter(q=>weakTopics.includes(q.t));}
+ if(!pool.length){alert(mode==="review"?"No mistakes to review yet.":"Complete some practice first to discover your weak spots.");return}
  const recent=store.get("imm-recent-"+selectedTopic,[]);
  const fresh=shuffle(pool.filter(q=>!recent.includes(q.id)));
  const old=shuffle(pool.filter(q=>recent.includes(q.id)));
  // Mixed practice favors approachable questions, with occasional harder ones.
- const pick=selectedTopic==="Mixed practice"
+ const pick=selectedTopic==="Mixed practice"&&mode==="normal"
   ? [...fresh.filter(q=>q.level==="A1").slice(0,5),...fresh.filter(q=>q.level==="A2").slice(0,3),...fresh.filter(q=>q.level==="B1").slice(0,2)]
   : fresh.slice(0,10);
  const selected=[...pick,...fresh,...old].filter((q,i,a)=>a.findIndex(x=>x.id===q.id)===i).slice(0,10);
@@ -71,19 +77,20 @@ function choose(i){
  $("next").classList.remove("hide");
 }
 function finish(){
- if(!isUnlocked())store.set("imm-free-rounds",roundsPlayed()+1);
  refreshOffer();
  const best=store.get("imm-best-"+selectedTopic,0);
  if(points>best)store.set("imm-best-"+selectedTopic,points);
  $("result").textContent=points+" / 10";
  $("message").textContent=points>=8?"Brilliant! You've got this.":points>=5?"Nice work! Every round makes you stronger.":"Keep going. Learning takes practice.";
  show("finish");
- if(!isUnlocked()&&roundsPlayed()>=FREE_ROUNDS){$("again").textContent="See unlimited practice →"}else{$("again").textContent="Play again →"}
+ $("again").textContent="Play again →";
 }
 $("next").onclick=()=>{index++;if(index===10)finish();else render()};
-$("start").onclick=()=>{selectTopic("Mixed practice");start()};
-$("topic-start").onclick=start;
-$("again").onclick=start;
+$("start").onclick=()=>{selectTopic("Mixed practice");start("normal")};
+$("topic-start").onclick=()=>start("normal");
+$("review").onclick=()=>start("review");
+$("weak").onclick=()=>start("weak");
+$("again").onclick=()=>start(mode);
 $("view-upgrade").onclick=()=>show("upgrade");
 $("back").onclick=()=>{refreshOffer();show("welcome")};
 $("restore").onclick=async()=>{
