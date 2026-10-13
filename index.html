@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#2563eb"><title>I Me Mine — English Grammar</title>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#18243b;background:#f6f7fc}*{box-sizing:border-box}body{margin:0}main{max-width:540px;margin:auto;min-height:100dvh;padding:calc(env(safe-area-inset-top) + 35px) 22px 36px}.brand{display:flex;align-items:center;gap:9px;font-weight:900;font-size:23px}.brand span{padding:5px 11px;border-radius:13px;color:white}.brand span:nth-child(1){background:#2563eb}.brand span:nth-child(2){background:#ec4899}.brand span:nth-child(3){background:#f59e0b;color:#1b2540}.eyebrow{color:#63718d;font-size:12px;letter-spacing:.12em;font-weight:800;text-transform:uppercase;margin-top:45px}.hero{font-size:clamp(33px,8vw,48px);line-height:1.09;letter-spacing:-.04em;margin:14px 0}p{line-height:1.55;color:#5b6680}.card{background:white;border:1px solid #e6eaf4;border-radius:25px;padding:25px;box-shadow:0 15px 40px #18243b0a;margin-top:25px}.top{display:flex;justify-content:space-between;color:#68748e;font-size:13px;font-weight:700}.progress{height:8px;background:#eef1f8;border-radius:10px;margin:15px 0 25px;overflow:hidden}.fill{height:100%;width:0;background:#2563eb;transition:width .2s}.prompt{font-size:25px;font-weight:800;line-height:1.35;margin:12px 0 24px}.choices{display:grid;gap:11px}button{font:inherit;cursor:pointer}.choice{border:2px solid #e3e8f2;background:#fff;border-radius:15px;padding:17px;text-align:left;font-weight:750;color:#24314a}.choice:disabled{cursor:default}.choice.correct{background:#e7f8ed;border-color:#22a05a}.choice.wrong{background:#fff0f3;border-color:#ec4899}.feedback{padding:15px;border-radius:14px;background:#f2f5fc;margin-top:16px;font-size:14px;line-height:1.5}.primary{width:100%;padding:17px;background:#2563eb;border:0;border-radius:15px;color:white;font-weight:800;margin-top:16px}.small{text-align:center;font-size:12px;margin-top:26px;color:#8a94a8}h2{font-size:30px;margin:12px 0}.hide{display:none}
+</style></head><body><main>
+<div class="brand"><span>I</span><span>me</span><span>mine</span></div>
+<section id="welcome"><div class="eyebrow">English grammar, made playful</div><h1 class="hero">Small lessons.<br>Big confidence.</h1><p>Practice the English that trips everyone up. Quick questions, friendly explanations, and a little win every time.</p><div class="card"><h2>Ready to play?</h2><p>Try 10 quick questions. No account. No pressure.</p><button class="primary" id="start">Let's play →</button></div></section>
+<section id="game" class="hide"><div class="card"><div class="top"><span id="counter"></span><span id="score"></span></div><div class="progress"><div class="fill" id="fill"></div></div><div class="eyebrow" id="topic" style="margin:0"></div><div class="prompt" id="prompt"></div><div class="choices" id="choices"></div><div id="feedback" class="feedback hide" aria-live="polite"></div><button class="primary hide" id="next">Next question →</button></div></section>
+<section id="finish" class="hide"><div class="card"><div class="eyebrow">Round complete</div><h1 class="hero" id="result"></h1><p id="message"></p><button class="primary" id="again">Play again →</button></div></section>
+<div class="small">I Me Mine · Practice makes progress.</div></main>
+<script>
+const questions=[
+{t:"Pronouns",q:"___ am learning English.",a:["Me","I","Mine"],c:1,e:"Use ‘I’ as the subject of a sentence."},
+{t:"Pronouns",q:"Can you help ___?",a:["I","my","me"],c:2,e:"Use ‘me’ when someone or something receives the action."},
+{t:"Pronouns",q:"That blue jacket is ___.",a:["mine","my","me"],c:0,e:"‘Mine’ stands alone. ‘My’ needs a noun after it."},
+{t:"Articles",q:"She bought ___ umbrella.",a:["a","an","the"],c:1,e:"Use ‘an’ before a vowel sound, like the beginning of ‘umbrella’."},
+{t:"Verbs",q:"He ___ coffee every morning.",a:["drink","drinks","drinking"],c:1,e:"In the present simple, add -s for he, she, or it."},
+{t:"Questions",q:"___ you like music?",a:["Does","Are","Do"],c:2,e:"Use ‘do’ to make present-simple questions with ‘you’."},
+{t:"Prepositions",q:"We met ___ Monday.",a:["in","on","at"],c:1,e:"Use ‘on’ with days of the week."},
+{t:"Verbs",q:"Yesterday, I ___ to the shop.",a:["go","went","gone"],c:1,e:"‘Went’ is the simple past form of ‘go’."},
+{t:"Quantifiers",q:"How ___ apples do you need?",a:["much","many","little"],c:1,e:"Use ‘many’ with countable plural nouns like ‘apples’."},
+{t:"Pronouns",q:"This is ___ favorite song.",a:["mine","me","my"],c:2,e:"Use ‘my’ before a noun: ‘my favorite song’."},
+{t:"Articles",q:"She is ___ honest person.",a:["a","an","the"],c:1,e:"‘Honest’ starts with a vowel sound because the h is silent."},
+{t:"Verbs",q:"They ___ watching a film now.",a:["is","are","am"],c:1,e:"Use ‘are’ with ‘they’ in the present continuous."},
+{t:"Prepositions",q:"The meeting starts ___ 9 o’clock.",a:["on","at","in"],c:1,e:"Use ‘at’ for a specific clock time."},
+{t:"Pronouns",q:"Sarah and ___ went outside.",a:["me","I","mine"],c:1,e:"Use ‘I’ when you are part of the subject."},
+{t:"Verbs",q:"I have ___ that film before.",a:["saw","see","seen"],c:2,e:"After ‘have’, use the past participle: ‘seen’."}
+];
+let round=[],index=0,points=0,answered=false;
+const $=id=>document.getElementById(id);
+function show(id){["welcome","game","finish"].forEach(s=>$(s).classList.toggle("hide",s!==id))}
+function start(){round=[...questions].sort(()=>Math.random()-.5).slice(0,10);index=0;points=0;show("game");render()}
+function render(){answered=false;let x=round[index];$("counter").textContent="QUESTION "+(index+1)+" OF 10";$("score").textContent=points+" correct";$("fill").style.width=(index/10*100)+"%";$("topic").textContent=x.t;$("prompt").textContent=x.q;$("choices").replaceChildren();$("feedback").classList.add("hide");$("next").classList.add("hide");x.a.forEach((answer,i)=>{let b=document.createElement("button");b.className="choice";b.textContent=answer;b.onclick=()=>choose(i);$("choices").append(b)})}
+function choose(i){if(answered)return;answered=true;let x=round[index];if(i===x.c)points++;[...$("choices").children].forEach((b,j)=>{b.disabled=true;if(j===x.c)b.classList.add("correct");else if(j===i)b.classList.add("wrong")});$("score").textContent=points+" correct";$("feedback").textContent=(i===x.c?"✓ That's right! ":"Not quite. ")+x.e;$("feedback").classList.remove("hide");$("next").textContent=index===9?"See my results →":"Next question →";$("next").classList.remove("hide")}
+$("next").onclick=()=>{index++;if(index===10){$("result").textContent=points+" / 10";$("message").textContent=points>=8?"Brilliant! You've got this.":points>=5?"Nice work! Every round makes you stronger.":"Keep going. Learning takes practice.";show("finish")}else render()};
+$("start").onclick=start;$("again").onclick=start;
+</script></body></html>
