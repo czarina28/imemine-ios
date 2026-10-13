@@ -1,5 +1,5 @@
 /* Curated I Me Mine question bank. Keep answers/explanations aligned. */
-const QUESTIONS = [
+export const QUESTIONS = [
   {
     "id": 1,
     "level": "A1",
