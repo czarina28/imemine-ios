@@ -25,7 +25,8 @@
 #welcome .quick-action strong{font-size:13px}
 #welcome .quick-action small{font-size:11px}
 @media(max-height:740px){#welcome .home-title h1{font-size:28px;margin-bottom:12px}#welcome .today-card{padding:13px 16px}#welcome .today-main{margin:9px 0}#welcome .quick-action{min-height:90px}}
-\n#plan-screen .settings-card .primary{width:100%;margin-top:12px}\n</style></head><body><main>
+
+#plan-screen .settings-card .primary{width:100%;margin-top:12px}\n</style></head><body><main>
 <header class="app-header"><div class="app-identity"><div class="wordmark" aria-label="I Me Mine"><span>I</span><span>me</span><span>mine</span></div></div><button class="header-plus" id="view-upgrade" aria-label="Explore Plus">PLUS ✦</button></header>
 <section id="welcome" class="screen"><div class="home-title"><h1>You know better.<br><em>Now do better.</em></h1></div><div class="today-card"><div class="eyebrow">TODAY'S PRACTICE</div><div class="today-main"><div><h2>Ready for a round?</h2><p>A little practice makes a difference.</p></div><div class="round-ring"><strong>10</strong><small>questions</small></div></div><button class="primary" id="home-practice">Start Practice →</button></div>
  <div class="welcome-heading hide"><span class="eyebrow">YOUR PRACTICE</span><h1>Ready for a quick round?</h1><p>Ten questions. One little win at a time.</p></div>
@@ -148,14 +149,14 @@ function start(newMode="normal"){
  const groups=new Map();
  for(const q of pool){const key=selectedTopic==="Mixed practice"||mode!=="normal"?q.t:q.level;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(q)}
  for(const [key,items] of groups)groups.set(key,shuffle(items).sort((x,y)=>Number(recentSet.has(x.id))-Number(recentSet.has(y.id))||Math.abs(difficulty[x.level]-(stage-1))-Math.abs(difficulty[y.level]-(stage-1))));
- const selected=[],keys=shuffle([...groups.keys()]);
+ const selected=[],keys=mode==="plan"?[...groups.keys()]:shuffle([...groups.keys()]);
  while(selected.length<count){let added=false;for(const key of keys){const q=groups.get(key).shift();if(q){selected.push(q);added=true;if(selected.length===count)break}}if(!added)break}
  // Most questions are approachable, with a couple of harder questions.
  if(mode==="normal"&&selectedTopic==="Mixed practice"&&stage===1){
   const hard=selected.filter(q=>q.level==="B1");
   if(hard.length>2){const keep=new Set(hard.slice(0,2).map(q=>q.id));const easy=shuffle(pool.filter(q=>q.level!=="B1"&&!selected.some(s=>s.id===q.id))).sort((x,y)=>Number(recentSet.has(x.id))-Number(recentSet.has(y.id)));for(let i=selected.length-1;i>=0;i--){if(selected[i].level==="B1"&&!keep.has(selected[i].id)&&easy.length)selected[i]=easy.shift()}}
  }
- selected.sort((x,y)=>(difficulty[x.level]??1)-(difficulty[y.level]??1));
+ if(mode!=="plan")selected.sort((x,y)=>(difficulty[x.level]??1)-(difficulty[y.level]??1));
  round=selected.map(q=>{const order=shuffle(q.a.map((_,i)=>i));return {...q,a:order.map(i=>q.a[i]),c:order.indexOf(q.c)}});
  store.set(historyKey,[...new Set([...round.map(q=>q.id),...recent])].slice(0,Math.min(pool.length,Math.max(30,Math.floor(pool.length*.6)))));
  index=0;points=0;show("game");render();
