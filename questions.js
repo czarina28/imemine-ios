@@ -7669,5 +7669,551 @@ export const QUESTIONS = [
     ],
     "c": 1,
     "e": "Little used negatively at the start triggers inversion."
+  },
+  {
+    "id": 594,
+    "level": "C1",
+    "t": "Verbs",
+    "q": "Had it not been for her intervention, the negotiations ___ collapsed.",
+    "a": [
+      "would have",
+      "will have",
+      "had"
+    ],
+    "c": 0,
+    "e": "Had it not been for is an inverted third conditional: would have collapsed."
+  },
+  {
+    "id": 595,
+    "level": "C1",
+    "t": "Verbs",
+    "q": "She speaks as though she ___ the decision herself, but she wasn't involved.",
+    "a": [
+      "had made",
+      "has made",
+      "would make"
+    ],
+    "c": 0,
+    "e": "As though plus past perfect can describe an unreal earlier event."
+  },
+  {
+    "id": 596,
+    "level": "C1",
+    "t": "Verbs",
+    "q": "It is essential that every applicant ___ informed of the changes.",
+    "a": [
+      "is",
+      "be",
+      "will be"
+    ],
+    "c": 1,
+    "e": "The formal mandative subjunctive uses the base form be after essential that."
+  },
+  {
+    "id": 597,
+    "level": "C1",
+    "t": "Verbs",
+    "q": "Were the situation ___, we would have to reconsider our position.",
+    "a": [
+      "to deteriorate",
+      "deteriorated",
+      "deteriorating"
+    ],
+    "c": 0,
+    "e": "Were ... to is a formal inversion of if the situation were to deteriorate."
+  },
+  {
+    "id": 598,
+    "level": "C1",
+    "t": "Verbs",
+    "q": "The committee recommended that the policy ___ immediately.",
+    "a": [
+      "is revised",
+      "be revised",
+      "was revised"
+    ],
+    "c": 1,
+    "e": "Recommend that can take the passive mandative subjunctive be revised."
+  },
+  {
+    "id": 599,
+    "level": "C1",
+    "t": "Verbs",
+    "q": "He would sooner ___ than compromise his principles.",
+    "a": [
+      "resign",
+      "to resign",
+      "resigning"
+    ],
+    "c": 0,
+    "e": "Would sooner is followed by the bare infinitive."
+  },
+  {
+    "id": 600,
+    "level": "C1",
+    "t": "Verbs",
+    "q": "I would rather you ___ the issue at yesterday's meeting.",
+    "a": [
+      "had raised",
+      "raised",
+      "would raise"
+    ],
+    "c": 0,
+    "e": "Would rather plus past perfect expresses a preference about a past event."
+  },
+  {
+    "id": 601,
+    "level": "C1",
+    "t": "Verbs",
+    "q": "The manuscript is thought ___ in the seventeenth century.",
+    "a": [
+      "to have been written",
+      "to be written",
+      "having written"
+    ],
+    "c": 0,
+    "e": "A completed past passive event takes the perfect passive infinitive."
+  },
+  {
+    "id": 602,
+    "level": "C1",
+    "t": "Sentence structure",
+    "q": "Not for a moment ___ that the figures were inaccurate.",
+    "a": [
+      "I suspected",
+      "did I suspect",
+      "had I suspect"
+    ],
+    "c": 1,
+    "e": "Fronted negative adverbials require auxiliary–subject inversion."
+  },
+  {
+    "id": 603,
+    "level": "C1",
+    "t": "Sentence structure",
+    "q": "Only when the audit was complete ___ the scale of the problem.",
+    "a": [
+      "did they realize",
+      "they realized",
+      "had they realize"
+    ],
+    "c": 0,
+    "e": "Only when at the start triggers inversion in the main clause."
+  },
+  {
+    "id": 604,
+    "level": "C1",
+    "t": "Sentence structure",
+    "q": "Such ___ the public response that the organizers extended the exhibition.",
+    "a": [
+      "was",
+      "did",
+      "had"
+    ],
+    "c": 0,
+    "e": "Such was the response is a formal inverted construction."
+  },
+  {
+    "id": 605,
+    "level": "C1",
+    "t": "Sentence structure",
+    "q": "Under no circumstances ___ confidential information be disclosed.",
+    "a": [
+      "must",
+      "does",
+      "has"
+    ],
+    "c": 0,
+    "e": "Under no circumstances triggers inversion, with must before the subject."
+  },
+  {
+    "id": 606,
+    "level": "C1",
+    "t": "Sentence structure",
+    "q": "Much as I ___ his enthusiasm, I disagree with his conclusion.",
+    "a": [
+      "admire",
+      "am admiring",
+      "would admire"
+    ],
+    "c": 0,
+    "e": "Much as means although in this concessive construction."
+  },
+  {
+    "id": 607,
+    "level": "C1",
+    "t": "Sentence structure",
+    "q": "The evidence, ___ compelling, was ultimately inconclusive.",
+    "a": [
+      "while",
+      "despite",
+      "however"
+    ],
+    "c": 0,
+    "e": "While compelling is a reduced concessive clause meaning although it was compelling."
+  },
+  {
+    "id": 608,
+    "level": "C1",
+    "t": "Common mistakes",
+    "q": "We need to ___ a decision before Friday.",
+    "a": [
+      "make",
+      "do",
+      "take up"
+    ],
+    "c": 0,
+    "e": "English uses make a decision; German eine Entscheidung treffen does not translate word for word."
+  },
+  {
+    "id": 609,
+    "level": "C1",
+    "t": "Common mistakes",
+    "q": "She has worked here ___ 2021.",
+    "a": [
+      "since",
+      "for",
+      "from"
+    ],
+    "c": 0,
+    "e": "Since introduces a starting point; for introduces a duration."
+  },
+  {
+    "id": 610,
+    "level": "C1",
+    "t": "Common mistakes",
+    "q": "Can you explain the procedure ___ me?",
+    "a": [
+      "to",
+      "for",
+      "at"
+    ],
+    "c": 0,
+    "e": "Explain takes a direct object for the thing explained and to for the recipient."
+  },
+  {
+    "id": 611,
+    "level": "C1",
+    "t": "Common mistakes",
+    "q": "We discussed ___ at length yesterday.",
+    "a": [
+      "about the proposal",
+      "the proposal",
+      "on the proposal"
+    ],
+    "c": 1,
+    "e": "Discuss is transitive in English: discuss the proposal, without about."
+  },
+  {
+    "id": 612,
+    "level": "C1",
+    "t": "Common mistakes",
+    "q": "The information ___ reliable, but we should verify it.",
+    "a": [
+      "seems",
+      "seem",
+      "are seeming"
+    ],
+    "c": 0,
+    "e": "Information is an uncountable singular noun in English."
+  },
+  {
+    "id": 613,
+    "level": "C1",
+    "t": "Common mistakes",
+    "q": "I have ___ experience in this field.",
+    "a": [
+      "extensive",
+      "many",
+      "several"
+    ],
+    "c": 0,
+    "e": "Experience meaning professional knowledge is normally uncountable."
+  },
+  {
+    "id": 614,
+    "level": "C1",
+    "t": "Common mistakes",
+    "q": "She asked me whether I ___ finished the report.",
+    "a": [
+      "had",
+      "have",
+      "would"
+    ],
+    "c": 0,
+    "e": "Backshift in reported speech commonly changes have finished to had finished."
+  },
+  {
+    "id": 615,
+    "level": "C1",
+    "t": "Common mistakes",
+    "q": "I am used to ___ in international teams.",
+    "a": [
+      "work",
+      "working",
+      "have worked"
+    ],
+    "c": 1,
+    "e": "Be used to takes a noun or gerund; to is a preposition."
+  },
+  {
+    "id": 616,
+    "level": "C1",
+    "t": "Common mistakes",
+    "q": "I ___ my colleague's advice before making the decision.",
+    "a": [
+      "followed",
+      "obeyed to",
+      "heard on"
+    ],
+    "c": 0,
+    "e": "Follow advice is a natural collocation in English."
+  },
+  {
+    "id": 617,
+    "level": "C1",
+    "t": "Common mistakes",
+    "q": "The meeting was postponed ___ Monday.",
+    "a": [
+      "until",
+      "to",
+      "for"
+    ],
+    "c": 1,
+    "e": "Postpone to a specific new date is idiomatic; postpone until emphasizes the period of delay."
+  },
+  {
+    "id": 618,
+    "level": "C1",
+    "t": "Prepositions",
+    "q": "His comments were tantamount ___ an admission of guilt.",
+    "a": [
+      "to",
+      "with",
+      "for"
+    ],
+    "c": 0,
+    "e": "Tantamount to means equivalent in effect."
+  },
+  {
+    "id": 619,
+    "level": "C1",
+    "t": "Prepositions",
+    "q": "The outcome hinges ___ whether funding is approved.",
+    "a": [
+      "on",
+      "at",
+      "to"
+    ],
+    "c": 0,
+    "e": "Hinge on means depend on."
+  },
+  {
+    "id": 620,
+    "level": "C1",
+    "t": "Prepositions",
+    "q": "She was instrumental ___ securing the agreement.",
+    "a": [
+      "in",
+      "for",
+      "to"
+    ],
+    "c": 0,
+    "e": "Instrumental in is followed by a noun or gerund."
+  },
+  {
+    "id": 621,
+    "level": "C1",
+    "t": "Prepositions",
+    "q": "The decision was made ___ consultation with the legal team.",
+    "a": [
+      "in",
+      "under",
+      "by"
+    ],
+    "c": 0,
+    "e": "In consultation with is the standard phrase."
+  },
+  {
+    "id": 622,
+    "level": "C1",
+    "t": "Prepositions",
+    "q": "They are reluctant to commit ___ a fixed deadline.",
+    "a": [
+      "to",
+      "on",
+      "for"
+    ],
+    "c": 0,
+    "e": "Commit to is followed by a noun or gerund."
+  },
+  {
+    "id": 623,
+    "level": "C1",
+    "t": "Prepositions",
+    "q": "The new findings cast doubt ___ the original conclusion.",
+    "a": [
+      "on",
+      "to",
+      "about"
+    ],
+    "c": 0,
+    "e": "Cast doubt on is the standard collocation."
+  },
+  {
+    "id": 624,
+    "level": "C1",
+    "t": "Articles",
+    "q": "She plays ___ piano professionally.",
+    "a": [
+      "the",
+      "a",
+      "— (no article)"
+    ],
+    "c": 0,
+    "e": "Musical instruments commonly take the definite article after play."
+  },
+  {
+    "id": 625,
+    "level": "C1",
+    "t": "Articles",
+    "q": "He was appointed ___ chair of the committee.",
+    "a": [
+      "the",
+      "a",
+      "— (no article)"
+    ],
+    "c": 2,
+    "e": "Appoint someone chair generally omits an article before the role."
+  },
+  {
+    "id": 626,
+    "level": "C1",
+    "t": "Articles",
+    "q": "___ Netherlands is known for its extensive cycling infrastructure.",
+    "a": [
+      "The",
+      "A",
+      "— (no article)"
+    ],
+    "c": 0,
+    "e": "The Netherlands conventionally takes the definite article."
+  },
+  {
+    "id": 627,
+    "level": "C1",
+    "t": "Articles",
+    "q": "They reached ___ unanimous agreement after hours of discussion.",
+    "a": [
+      "an",
+      "a",
+      "the"
+    ],
+    "c": 1,
+    "e": "Unanimous begins with a consonant /j/ sound, so use a."
+  },
+  {
+    "id": 628,
+    "level": "C1",
+    "t": "Pronouns",
+    "q": "The consultant ___ we appointed last month has resigned.",
+    "a": [
+      "whom",
+      "whose",
+      "which"
+    ],
+    "c": 0,
+    "e": "Whom is a formal object relative pronoun referring to a person."
+  },
+  {
+    "id": 629,
+    "level": "C1",
+    "t": "Pronouns",
+    "q": "It was the manager herself ___ approved the exception.",
+    "a": [
+      "who",
+      "whom",
+      "whose"
+    ],
+    "c": 0,
+    "e": "Who is the subject of approved in this cleft construction."
+  },
+  {
+    "id": 630,
+    "level": "C1",
+    "t": "Questions",
+    "q": "How come ___ informed earlier?",
+    "a": [
+      "we weren't",
+      "weren't we",
+      "didn't we be"
+    ],
+    "c": 0,
+    "e": "How come introduces a clause with statement word order."
+  },
+  {
+    "id": 631,
+    "level": "C1",
+    "t": "Questions",
+    "q": "To what extent ___ the results been independently verified?",
+    "a": [
+      "have",
+      "did",
+      "were"
+    ],
+    "c": 0,
+    "e": "The passive present perfect question requires have before the subject."
+  },
+  {
+    "id": 632,
+    "level": "C1",
+    "t": "Quantifiers",
+    "q": "___ of the evidence was admissible in court.",
+    "a": [
+      "Little",
+      "Few",
+      "Many"
+    ],
+    "c": 0,
+    "e": "Evidence is uncountable, so little is appropriate."
+  },
+  {
+    "id": 633,
+    "level": "C1",
+    "t": "Quantifiers",
+    "q": "A great ___ of research has been devoted to this question.",
+    "a": [
+      "deal",
+      "number",
+      "many"
+    ],
+    "c": 0,
+    "e": "A great deal of is used with uncountable research."
+  },
+  {
+    "id": 634,
+    "level": "C1",
+    "t": "Quantifiers",
+    "q": "There were ___ objections than we had anticipated.",
+    "a": [
+      "fewer",
+      "less",
+      "little"
+    ],
+    "c": 0,
+    "e": "Objections are countable, so use fewer."
+  },
+  {
+    "id": 635,
+    "level": "C1",
+    "t": "Quantifiers",
+    "q": "___ a handful of participants completed the final survey.",
+    "a": [
+      "Only",
+      "Merely of",
+      "Few of"
+    ],
+    "c": 0,
+    "e": "Only a handful of is a natural quantifier phrase."
   }
 ];
