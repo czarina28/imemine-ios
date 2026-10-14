@@ -7162,5 +7162,512 @@ export const QUESTIONS = [
     ],
     "c": 2,
     "e": "Borrow means take temporarily from someone else."
+  },
+  {
+    "id": 555,
+    "level": "B2",
+    "t": "Verbs",
+    "q": "Hardly ___ the meeting begun when the fire alarm sounded.",
+    "a": [
+      "had",
+      "has",
+      "did"
+    ],
+    "c": 0,
+    "e": "After hardly at the beginning, use inversion: hardly had the meeting begun."
+  },
+  {
+    "id": 556,
+    "level": "B2",
+    "t": "Verbs",
+    "q": "If I ___ about the delay, I would have taken an earlier train.",
+    "a": [
+      "knew",
+      "had known",
+      "would know"
+    ],
+    "c": 1,
+    "e": "A past unreal condition uses if plus past perfect."
+  },
+  {
+    "id": 557,
+    "level": "B2",
+    "t": "Verbs",
+    "q": "By next July, she ___ here for ten years.",
+    "a": [
+      "will work",
+      "will have been working",
+      "has worked"
+    ],
+    "c": 1,
+    "e": "Future perfect continuous emphasizes duration up to a future point."
+  },
+  {
+    "id": 558,
+    "level": "B2",
+    "t": "Verbs",
+    "q": "I wish you ___ interrupting me.",
+    "a": [
+      "would stop",
+      "will stop",
+      "have stopped"
+    ],
+    "c": 0,
+    "e": "Wish plus would expresses irritation about another person's behavior."
+  },
+  {
+    "id": 559,
+    "level": "B2",
+    "t": "Verbs",
+    "q": "It's high time we ___ home.",
+    "a": [
+      "go",
+      "went",
+      "have gone"
+    ],
+    "c": 1,
+    "e": "It's high time takes a past form to express what should happen now."
+  },
+  {
+    "id": 560,
+    "level": "B2",
+    "t": "Verbs",
+    "q": "She denied ___ the confidential document.",
+    "a": [
+      "to share",
+      "sharing",
+      "share"
+    ],
+    "c": 1,
+    "e": "Deny takes a gerund."
+  },
+  {
+    "id": 561,
+    "level": "B2",
+    "t": "Verbs",
+    "q": "No sooner ___ the announcement than the phones started ringing.",
+    "a": [
+      "they made",
+      "had they made",
+      "they had made"
+    ],
+    "c": 1,
+    "e": "No sooner at the start triggers subject–auxiliary inversion."
+  },
+  {
+    "id": 562,
+    "level": "B2",
+    "t": "Verbs",
+    "q": "He ___ have forgotten the meeting; I reminded him this morning.",
+    "a": [
+      "can't",
+      "must",
+      "should"
+    ],
+    "c": 0,
+    "e": "Can't have expresses a strong conclusion that a past event is unlikely."
+  },
+  {
+    "id": 563,
+    "level": "B2",
+    "t": "Verbs",
+    "q": "The proposal is believed ___ by the board last week.",
+    "a": [
+      "to reject",
+      "to have been rejected",
+      "being rejected"
+    ],
+    "c": 1,
+    "e": "A past passive event after is believed takes the perfect passive infinitive."
+  },
+  {
+    "id": 564,
+    "level": "B2",
+    "t": "Verbs",
+    "q": "If only I ___ more carefully before signing.",
+    "a": [
+      "read",
+      "had read",
+      "would read"
+    ],
+    "c": 1,
+    "e": "If only plus past perfect expresses regret about the past."
+  },
+  {
+    "id": 565,
+    "level": "B2",
+    "t": "Pronouns",
+    "q": "The colleague ___ advice I followed has retired.",
+    "a": [
+      "who's",
+      "whose",
+      "whom"
+    ],
+    "c": 1,
+    "e": "Whose expresses possession."
+  },
+  {
+    "id": 566,
+    "level": "B2",
+    "t": "Pronouns",
+    "q": "The director, ___ I had never met, welcomed us personally.",
+    "a": [
+      "whom",
+      "whose",
+      "which"
+    ],
+    "c": 0,
+    "e": "Whom is the object of met in this relative clause."
+  },
+  {
+    "id": 567,
+    "level": "B2",
+    "t": "Pronouns",
+    "q": "Between you and ___, the figures don't add up.",
+    "a": [
+      "I",
+      "myself",
+      "me"
+    ],
+    "c": 2,
+    "e": "After a preposition, use the object pronoun me."
+  },
+  {
+    "id": 568,
+    "level": "B2",
+    "t": "Articles",
+    "q": "She was elected ___ president of the association.",
+    "a": [
+      "a",
+      "the",
+      "— (no article)"
+    ],
+    "c": 2,
+    "e": "After elect, the title of a position usually has no article."
+  },
+  {
+    "id": 569,
+    "level": "B2",
+    "t": "Articles",
+    "q": "___ more you practice, the more natural it becomes.",
+    "a": [
+      "A",
+      "The",
+      "— (no article)"
+    ],
+    "c": 1,
+    "e": "Correlative comparisons use the ... the ... pattern."
+  },
+  {
+    "id": 570,
+    "level": "B2",
+    "t": "Articles",
+    "q": "They travelled by ___ train rather than flying.",
+    "a": [
+      "a",
+      "the",
+      "— (no article)"
+    ],
+    "c": 2,
+    "e": "By train normally takes no article."
+  },
+  {
+    "id": 571,
+    "level": "B2",
+    "t": "Articles",
+    "q": "He has ___ unusually good grasp of the subject.",
+    "a": [
+      "a",
+      "an",
+      "the"
+    ],
+    "c": 1,
+    "e": "An comes before a vowel sound, including unusually."
+  },
+  {
+    "id": 572,
+    "level": "B2",
+    "t": "Questions",
+    "q": "Could you tell me where ___?",
+    "a": [
+      "is the station",
+      "the station is",
+      "does the station be"
+    ],
+    "c": 1,
+    "e": "Indirect questions use statement word order."
+  },
+  {
+    "id": 573,
+    "level": "B2",
+    "t": "Questions",
+    "q": "Not only ___ late, but she also forgot the documents.",
+    "a": [
+      "she was",
+      "was she",
+      "did she be"
+    ],
+    "c": 1,
+    "e": "Not only at the start triggers inversion."
+  },
+  {
+    "id": 574,
+    "level": "B2",
+    "t": "Questions",
+    "q": "You'd rather I didn't mention it, ___?",
+    "a": [
+      "wouldn't you",
+      "didn't you",
+      "hadn't you"
+    ],
+    "c": 0,
+    "e": "The tag refers to you would rather."
+  },
+  {
+    "id": 575,
+    "level": "B2",
+    "t": "Common mistakes",
+    "q": "The report was ___ detailed that nobody finished reading it.",
+    "a": [
+      "such",
+      "so",
+      "too"
+    ],
+    "c": 1,
+    "e": "So modifies an adjective; such usually precedes a noun phrase."
+  },
+  {
+    "id": 576,
+    "level": "B2",
+    "t": "Common mistakes",
+    "q": "Despite ___ exhausted, she finished the presentation.",
+    "a": [
+      "be",
+      "being",
+      "she was"
+    ],
+    "c": 1,
+    "e": "Despite takes a noun or gerund, not a finite clause."
+  },
+  {
+    "id": 577,
+    "level": "B2",
+    "t": "Common mistakes",
+    "q": "He insisted ___ paying for dinner.",
+    "a": [
+      "on",
+      "to",
+      "for"
+    ],
+    "c": 0,
+    "e": "Insist on takes a gerund."
+  },
+  {
+    "id": 578,
+    "level": "B2",
+    "t": "Common mistakes",
+    "q": "I look forward to ___ from you.",
+    "a": [
+      "hear",
+      "hearing",
+      "have heard"
+    ],
+    "c": 1,
+    "e": "To in look forward to is a preposition."
+  },
+  {
+    "id": 579,
+    "level": "B2",
+    "t": "Common mistakes",
+    "q": "There is little point ___ about something we cannot change.",
+    "a": [
+      "complain",
+      "to complain",
+      "in complaining"
+    ],
+    "c": 2,
+    "e": "There's little point in takes a gerund."
+  },
+  {
+    "id": 580,
+    "level": "B2",
+    "t": "Common mistakes",
+    "q": "The company has fewer ___ than last year.",
+    "a": [
+      "staffs",
+      "employees",
+      "personnel"
+    ],
+    "c": 1,
+    "e": "Fewer modifies countable plural nouns."
+  },
+  {
+    "id": 581,
+    "level": "B2",
+    "t": "Common mistakes",
+    "q": "I would rather you ___ me before making that decision.",
+    "a": [
+      "ask",
+      "asked",
+      "have asked"
+    ],
+    "c": 1,
+    "e": "Would rather plus another subject uses a past form for a present preference."
+  },
+  {
+    "id": 582,
+    "level": "B2",
+    "t": "Prepositions",
+    "q": "The decision is contingent ___ receiving final approval.",
+    "a": [
+      "on",
+      "of",
+      "to"
+    ],
+    "c": 0,
+    "e": "Contingent on means dependent on."
+  },
+  {
+    "id": 583,
+    "level": "B2",
+    "t": "Prepositions",
+    "q": "He was accused ___ withholding information.",
+    "a": [
+      "for",
+      "of",
+      "with"
+    ],
+    "c": 1,
+    "e": "Accused of is followed by a noun or gerund."
+  },
+  {
+    "id": 584,
+    "level": "B2",
+    "t": "Prepositions",
+    "q": "The policy came ___ effect in April.",
+    "a": [
+      "in",
+      "into",
+      "to"
+    ],
+    "c": 1,
+    "e": "Come into effect means become operative."
+  },
+  {
+    "id": 585,
+    "level": "B2",
+    "t": "Prepositions",
+    "q": "Her explanation was consistent ___ the evidence.",
+    "a": [
+      "to",
+      "with",
+      "for"
+    ],
+    "c": 1,
+    "e": "Consistent with means in agreement with."
+  },
+  {
+    "id": 586,
+    "level": "B2",
+    "t": "Prepositions",
+    "q": "They objected ___ being excluded from the discussion.",
+    "a": [
+      "to",
+      "against",
+      "for"
+    ],
+    "c": 0,
+    "e": "Object to takes a gerund."
+  },
+  {
+    "id": 587,
+    "level": "B2",
+    "t": "Prepositions",
+    "q": "He succeeded ___ persuading the committee.",
+    "a": [
+      "at",
+      "to",
+      "in"
+    ],
+    "c": 2,
+    "e": "Succeed in takes a gerund."
+  },
+  {
+    "id": 588,
+    "level": "B2",
+    "t": "Sentence structure",
+    "q": "Only after the meeting ___ the implications.",
+    "a": [
+      "we understood",
+      "did we understand",
+      "we did understand"
+    ],
+    "c": 1,
+    "e": "Only after at the start triggers inversion in the main clause."
+  },
+  {
+    "id": 589,
+    "level": "B2",
+    "t": "Sentence structure",
+    "q": "Under no circumstances ___ the door unlocked.",
+    "a": [
+      "you should leave",
+      "should you leave",
+      "you leave"
+    ],
+    "c": 1,
+    "e": "A fronted negative phrase triggers inversion."
+  },
+  {
+    "id": 590,
+    "level": "B2",
+    "t": "Sentence structure",
+    "q": "Rarely ___ such a convincing argument.",
+    "a": [
+      "I have heard",
+      "have I heard",
+      "I heard have"
+    ],
+    "c": 1,
+    "e": "Rarely at the beginning requires inversion."
+  },
+  {
+    "id": 591,
+    "level": "B2",
+    "t": "Sentence structure",
+    "q": "So convincing ___ that the committee changed its mind.",
+    "a": [
+      "was her argument",
+      "her argument was",
+      "did her argument"
+    ],
+    "c": 0,
+    "e": "Fronted so plus adjective can trigger inversion."
+  },
+  {
+    "id": 592,
+    "level": "B2",
+    "t": "Sentence structure",
+    "q": "Not until the final page ___ the truth.",
+    "a": [
+      "she discovered",
+      "did she discover",
+      "she did discovered"
+    ],
+    "c": 1,
+    "e": "Not until at the start triggers inversion in the main clause."
+  },
+  {
+    "id": 593,
+    "level": "B2",
+    "t": "Sentence structure",
+    "q": "Little ___ how much the decision would cost.",
+    "a": [
+      "they knew",
+      "did they know",
+      "they did knew"
+    ],
+    "c": 1,
+    "e": "Little used negatively at the start triggers inversion."
   }
 ];
