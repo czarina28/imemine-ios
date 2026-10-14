@@ -133,14 +133,14 @@ function practiceStage(){
  const sessions=store.get("imm-sessions",[]).filter(s=>s.mode==="normal"&&s.topic==="Mixed practice"&&s.total>=8).slice(-3);
  if(sessions.length<2)return 1;
  const correct=sessions.reduce((n,s)=>n+s.score,0),total=sessions.reduce((n,s)=>n+s.total,0);
- return correct/total>=.9?4:correct/total>=.8?3:correct/total>=.7?2:1;
+ return correct/total>=.9?5:correct/total>=.8?4:correct/total>=.7?3:1;
 }
 function start(newMode="normal"){
  mode=newMode;
  const mistakes=store.get("imm-mistakes",[]);
  const stats=store.get("imm-stats",{});
  let pool=QUESTIONS.filter(q=>selectedTopic==="Mixed practice"||q.t===selectedTopic);
- if(mode==="plan"){const learning=store.get("imm-learning",{});const unseen=pool.filter(q=>!learning[q.id]?.attempts);const challenge=unseen.filter(q=>q.level==="B1");const others=unseen.filter(q=>q.level!=="B2"&&q.level!=="B1");const seen=pool.filter(q=>learning[q.id]?.attempts).sort((a,b)=>(learning[a.id]?.streak||0)-(learning[b.id]?.streak||0));pool=[...challenge,...others,...seen].slice(0,Math.max(10,Math.min(25,pool.length)));}
+ if(mode==="plan"){const learning=store.get("imm-learning",{});const unseen=pool.filter(q=>!learning[q.id]?.attempts);const challenge=unseen.filter(q=>q.level==="B1");const others=unseen.filter(q=>q.level!=="C1"&&q.level!=="B2"&&q.level!=="B1");const seen=pool.filter(q=>learning[q.id]?.attempts).sort((a,b)=>(learning[a.id]?.streak||0)-(learning[b.id]?.streak||0));pool=[...challenge,...others,...seen].slice(0,Math.max(10,Math.min(25,pool.length)));}
  if(mode==="review")pool=QUESTIONS.filter(q=>mistakes.includes(q.id));
  if(mode==="weak"){const weakTopics=Object.entries(stats).filter(([,s])=>s.wrong>0).sort((a,b)=>b[1].wrong-a[1].wrong).slice(0,3).map(([topic])=>topic);pool=QUESTIONS.filter(q=>weakTopics.includes(q.t));}
  if(!pool.length){alert(mode==="review"?"No mistakes to review yet.":"Complete some practice first to discover your weak spots.");return}
@@ -148,7 +148,7 @@ function start(newMode="normal"){
  const recent=store.get(historyKey,[]);
  const count=Math.min(10,pool.length);
  const recentSet=new Set(recent);
- const difficulty={A1:0,A2:1,B1:2,B2:3};
+ const difficulty={A1:0,A2:1,B1:2,B2:3,C1:4};
  const stage=practiceStage();
  const groups=new Map();
  for(const q of pool){const key=selectedTopic==="Mixed practice"||mode!=="normal"?q.t:q.level;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(q)}
@@ -157,8 +157,8 @@ function start(newMode="normal"){
  while(selected.length<count){let added=false;for(const key of keys){const q=groups.get(key).shift();if(q){selected.push(q);added=true;if(selected.length===count)break}}if(!added)break}
  // Most questions are approachable, with a couple of harder questions.
  if(mode==="normal"&&selectedTopic==="Mixed practice"&&stage===1){
-  const hard=selected.filter(q=>q.level==="B1"||q.level==="B2");
-  if(hard.length>2){const keep=new Set(hard.slice(0,2).map(q=>q.id));const easy=shuffle(pool.filter(q=>q.level!=="B1"&&q.level!=="B2"&&!selected.some(s=>s.id===q.id))).sort((x,y)=>Number(recentSet.has(x.id))-Number(recentSet.has(y.id)));for(let i=selected.length-1;i>=0;i--){if((selected[i].level==="B1"||selected[i].level==="B2")&&!keep.has(selected[i].id)&&easy.length)selected[i]=easy.shift()}}
+  const hard=selected.filter(q=>q.level==="B1"||q.level==="B2"||q.level==="C1");
+  if(hard.length>2){const keep=new Set(hard.slice(0,2).map(q=>q.id));const easy=shuffle(pool.filter(q=>q.level!=="B1"&&q.level!=="B2"&&q.level!=="C1"&&!selected.some(s=>s.id===q.id))).sort((x,y)=>Number(recentSet.has(x.id))-Number(recentSet.has(y.id)));for(let i=selected.length-1;i>=0;i--){if((selected[i].level==="B1"||selected[i].level==="B2"||selected[i].level==="C1")&&!keep.has(selected[i].id)&&easy.length)selected[i]=easy.shift()}}
  }
  if(mode!=="plan")selected.sort((x,y)=>(difficulty[x.level]??1)-(difficulty[y.level]??1));
  round=selected.map(q=>{const order=shuffle(q.a.map((_,i)=>i));return {...q,a:order.map(i=>q.a[i]),c:order.indexOf(q.c)}});
