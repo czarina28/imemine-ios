@@ -29,6 +29,18 @@ jobs:
           npm run build
           npx cap add ios
           npx cap sync ios
+      - name: Configure iPhone-only deployment
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("ios/App/App.xcodeproj/project.pbxproj")
+          s = p.read_text()
+          s = s.replace('TARGETED_DEVICE_FAMILY = "1,2";', 'TARGETED_DEVICE_FAMILY = "1";')
+          s = s.replace('TARGETED_DEVICE_FAMILY = 1,2;', 'TARGETED_DEVICE_FAMILY = 1;')
+          if 'TARGETED_DEVICE_FAMILY = "1";' not in s and 'TARGETED_DEVICE_FAMILY = 1;' not in s:
+              raise SystemExit("Could not configure iPhone-only target")
+          p.write_text(s)
+          PY
       - name: Set I Me Mine app icon
         run: |
           python3 -m pip install --quiet --break-system-packages Pillow
