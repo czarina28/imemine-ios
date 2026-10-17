@@ -1,32 +1,44 @@
 #!/usr/bin/env python3
-"""Generate the original three-block I Me Mine icon for the Capacitor iOS asset catalog."""
+"""Generate a balanced three-block I Me Mine iOS app icon."""
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 SIZE = 1024
 img = Image.new("RGB", (SIZE, SIZE), "#ffffff")
 draw = ImageDraw.Draw(img)
-# Original identity: blue I, pink me, green mine, on white.
+# Equal-height blocks, proportional widths, consistent gaps and text padding.
 tiles = [
-    (46, 348, 258, 674, "#2862f1", "I"),
-    (280, 348, 565, 674, "#ed4398", "me"),
-    (587, 348, 978, 674, "#1da66d", "mine"),
+    (80, 355, 325, 669, "#2862f1", "I"),
+    (341, 355, 626, 669, "#ed4398", "me"),
+    (642, 355, 944, 669, "#1da66d", "mine"),
 ]
-font_path = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
-if not Path(font_path).exists():
-    font_path = "/System/Library/Fonts/Supplemental/Arial.ttf"
+font_candidates = [
+    "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+]
+font_path = next((p for p in font_candidates if Path(p).exists()), None)
+if font_path is None:
+    raise FileNotFoundError("A bold TrueType font is required for icon generation")
+
 for x0, y0, x1, y1, color, label in tiles:
-    draw.rounded_rectangle((x0, y0, x1, y1), radius=62, fill=color)
-    font_size = 178 if label == "mine" else 202
-    font = ImageFont.truetype(font_path, font_size)
-    # Use a shared typographic baseline instead of centering each word's
-    # individual bounding box. Different word shapes and font sizes otherwise
-    # make "me" appear to float above "mine".
-    baseline_y = 565
-    draw.text(((x0 + x1) / 2, baseline_y), label, font=font,
-              anchor="ms", fill="white")
+    draw.rounded_rectangle((x0, y0, x1, y1), radius=65, fill=color)
+    # Fit each word to a generous minimum horizontal inset.
+    max_width = x1 - x0 - 48
+    font_size = 190
+    while font_size > 40:
+        font = ImageFont.truetype(font_path, font_size)
+        if draw.textbbox((0, 0), label, font=font)[2] <= max_width:
+            break
+        font_size -= 2
+    bbox = draw.textbbox((0, 0), label, font=font)
+    text_width = bbox[2] - bbox[0]
+    text_height = bbox[3] - bbox[1]
+    x = (x0 + x1 - text_width) / 2 - bbox[0]
+    y = (y0 + y1 - text_height) / 2 - bbox[1]
+    draw.text((x, y), label, font=font, fill="white")
+
 out = Path("ios/App/App/Assets.xcassets/AppIcon.appiconset")
 out.mkdir(parents=True, exist_ok=True)
 img.save(out / "AppIcon-512@2x.png", format="PNG")
 (out / "Contents.json").write_text('{"images":[{"filename":"AppIcon-512@2x.png","idiom":"universal","platform":"ios","size":"1024x1024"}],"info":{"author":"xcode","version":1}}\n')
-print("Created 1024x1024 I Me Mine app icon")
+print("Created 1024x1024 balanced I Me Mine app icon")
